@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style type="text/css">
+        /*解决显示不了地图*/
+        html,body{width: 100%;height: 100%;overflow: hidden;}
+        html {
+            font-size: 14px;
+        }
+
+        body {
+            font-family: "Microsoft Yahei";
+        }
+        /* 初始化 */
+        a,body, div, ul, li, ol, h1, h2, h3, h4, h5, h6, input, textarea, select, p, dl, dt, dd, a, img, button, form, table, th, tr, td, tbody, article,
+        aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            /*border: none;*/
+        }
+        .fontYellow{
+            color: #e9ec06;
+        }
+
+        /*显示在地图之上的样式*/
+        .elementAboveMap{
+            z-index: 1201;
+            position: absolute;
+        }
+        .outWith{
+            min-width: 1366px;
+            width: 100%;
+        }
+        .mainTop{
+            height: 60px;
+            background-color: #0c3a5f;
+            filter: alpha(Opacity=80);
+            -moz-opacity: 0.8;
+            opacity: 0.8;
+        }
+        #stationOverMap{width: 100%;height: 100%;overflow: hidden;margin:0;}
+        /*顶部样式开始*/
+        #mainTitle{
+            min-width: 350px;
+            width: 25.6%;
+            height: 100%;
+            line-height: 60px;
+            vertical-align: middle;
+            padding-left: 25px;
+            background-image: url("image/display_title_bg.png");
+            display: inline-block;
+            background-size:100%;
+        }
+        #mainTitle ~ nav{
+            display: inline-block;
+            vertical-align: middle;
+        }
+        #mainMenuList{
+            /*min-width: 1006px;*/
+            min-width: 1000px;
+            width: 74.4%;
+            float: left;
+            margin-left: 10px;
+            list-style: none;
+        }
+        #mainMenuList li{
+            /*width: 16.666%;*/
+            width: 16.66%;
+            float: left;
+            color: #ffffff;
+            /*margin-left: 10px;*/
+        }
+        #mainMenuList li a{
+            width: 86%;
+            display: inline-block;
+            vertical-align: middle;
+            text-align: center;
+            cursor: pointer;
+            padding: 2px;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+        #mainMenuList li a img{
+            width: 15px;
+            height: 15px;
+            vertical-align: middle;
+            margin-right: 5px;
+
+        }
+        #mainMenuList li a img:not(.noMargin){
+            margin-bottom: 3px;
+        }
+        #mainMenuList li>img{
+            display: inline-block;
+            vertical-align: middle;
+            width: 10%;
+        }
+        .menuLiSelected{
+            border: 1px solid rgba(233,236,6,0.5) !important;
+            color: #e9ec06;
+        }
+        /*顶部样式结束*/
+
+        /*###############################*/
+
+        /*右边半径选项开始*/
+        #rightRadiusSelectItem{
+            right: 20px;
+            top: 80px;
+            width: 100px;
+            height: 100px;
+        }
+        #rightRadiusSelectItem ul{
+            height:100%;
+            width: 100%;
+        }
+        #rightRadiusSelectItem ul li{
+            display: block;
+            width: 100%;
+            height: 33.33%;
+            list-style: none;
+
+        }
+        #rightRadiusSelectItem ul li span{
+            width: 100%;
+            height: 100%;
+            line-height: 100%;
+            display: inline-block;
+            vertical-align: middle;
+            text-align: center;
+            padding-top: 10px;
+        }
+        #rightRadiusSelectItem ul li:nth-of-type(1){
+            color: #dd6b66;
+            /*border: 1px solid rgba(255,255,255,0.5);*/
+            border: 1px solid #dd6b66;
+        }
+        #rightRadiusSelectItem ul li:nth-of-type(2){
+            color: #759aa0;
+            border: 1px solid #759aa0;
+        }
+        #rightRadiusSelectItem ul li:nth-of-type(3){
+            color: #e69d87;
+            border: 1px solid #e69d87;
+        }
+        /*右边半径选项结束*/
+    </style>
+</head>
+<body>
+<!--顶部-->
+<header class="outWith mainTop elementAboveMap">
+    <h1 id="mainTitle" class="fontYellow">在线终端管理系统</h1>
+    <!--导航栏-->
+    <nav>
+        <ul id="mainMenuList">
+            <li>
+                <a class="menuLiSelected">
+                    <img src="image/station_over_li_icon_selected.png" class="noMargin">站点覆盖查询
+                </a>
+                <img src="image/white_line.png">
+            </li>
+            <li>
+                <a>
+                    <img src="image/line_goto_li_icon_normal.png">线路通达区域
+                </a>
+                <img src="image/white_line.png">
+            </li>
+            <li>
+                <a>
+                    <img src="image/passenger_flow_li_icon_normal.png">客流量查询
+                </a>
+                <img src="image/white_line.png">
+            </li>
+            <li>
+                <a>
+                    <img src="image/advocacy_route_li_icon_normal.png">拥堵路段影响线路
+                </a>
+                <img src="image/white_line.png">
+            </li>
+            <li>
+                <a>
+                    <img src="image/company_apply_li_icon_normal.png">企业运营数据
+                </a>
+                <img src="image/white_line.png">
+            </li>
+            <li>
+                <a>
+                    <img src="image/pay_channel_li_icon_normal.png">支付渠道比例图
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<!--地图开始-->
+<section id="stationOverMap">
+</section>
+<!--地图结束-->
+<!--半径选项开始-->
+<section id="rightRadiusSelectItem" class="elementAboveMap">
+    <ul>
+        <li><span><strong>200</strong>米</span></li>
+        <li><span><strong>400</strong>米</span></li>
+        <li><span><strong>600</strong>米</span></li>
+    </ul>
+</section>
+<!--半径选项结束-->
+<script src="js/jquery.min.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=fdv5gclnF2HSnNyKm4Dj3aVuLUGMLUZ1"></script>
+<script src="js/baiduMapCommon.js"></script>
+<script src="js/baiduMapStyle.js"></script>
+<script type="text/javascript">
+    $(function () {
+        // 获取Map实例
+        var stationOverMap = baiduMapUtil.getDisplayMap("stationOverMap");
+        stationOverMap.setMapStyle({styleJson:baiduMapStyle});
+        //菜单项
+        var menuItems = $('#mainMenuList li a');
+        menuItems.on('click',function () {
+            //先移除全部a选中样式
+            menuItems.removeClass('menuLiSelected');
+            //判断a是否有menuLiSelected样式
+            if (!$(this).hasClass('menuLiSelected')){
+                $(this).addClass('menuLiSelected');
+            }
+            setMenuListImg();
+        });
+
+        //设置菜单列表的图片
+        var setMenuListImg = function () {
+            //设置img
+             menuItems.each(function(index){
+                if ($(this).hasClass('menuLiSelected')){
+                    switch(index) {
+                        case 0:
+                            $(this).find('img').first().attr('src','image/station_over_li_icon_selected.png');
+                            break;
+                        case 1:
+                            $(this).find('img').first().attr('src','image/line_goto_li_icon_selected.png');
+                            break;
+                        case 2:
+                            $(this).find('img').first().attr('src','image/passenger_flow_li_icon_selected.png');
+                            break;
+                        case 3:
+                            $(this).find('img').first().attr('src','image/advocacy_route_li_icon_selected.png');
+                            break;
+                        case 4:
+                            $(this).find('img').first().attr('src','image/company_apply_li_icon_selected.png');
+                            break;
+                        case 5:
+                            $(this).find('img').first().attr('src','image/pay_channel_li_icon_selected.png');
+                            break;
+                    }
+                }else{
+                    switch(index) {
+                        case 0:
+                            $(this).find('img').first().attr('src','image/station_over_li_icon_normal.png');
+                            break;
+                        case 1:
+                            $(this).find('img').first().attr('src','image/line_goto_li_icon_normal.png');
+                            break;
+                        case 2:
+                            $(this).find('img').first().attr('src','image/passenger_flow_li_icon_normal.png');
+                            break;
+                        case 3:
+                            $(this).find('img').first().attr('src','image/advocacy_route_li_icon_normal.png');
+                            break;
+                        case 4:
+                            $(this).find('img').first().attr('src','image/company_apply_li_icon_normal.png');
+                            break;
+                        case 5:
+                            $(this).find('img').first().attr('src','image/pay_channel_li_icon_normal.png');
+                            break;
+                    }
+                }
+            });
+        }
+    });
+</script>
+</body>
+</html>
