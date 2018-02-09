@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style type="text/css">
+        /*解决显示不了地图*/
+        html,body{width: 100%;height: 100%;overflow: hidden;}
+        html {
+            font-size: 14px;
+        }
+
+        body {
+            font-family: "Microsoft Yahei";
+        }
+        /* 初始化 */
+        body, div, ul, li, ol, h1, h2, h3, h4, h5, h6, input, textarea, select, p, dl, dt, dd, a, img, button, form, table, th, tr, td, tbody, article,
+        aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section,a,span {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            /*border: none;*/
+        }
+        .fontYellow{
+            color: #e9ec06;
+        }
+
+        /*显示在地图之上的样式*/
+        .elementAboveMap{
+            z-index: 1201;
+            position: absolute;
+        }
+        .outWith{
+            min-width: 1366px;
+            width: 100%;
+        }
+        .mainTop{
+            height: 60px;
+            background-color: #0c3a5f;
+            filter: alpha(Opacity=80);
+            -moz-opacity: 0.8;
+            opacity: 0.8;
+        }
+        /*地图通用样式*/
+        .mapStyle{width: 100%;height: 100%;overflow: hidden;margin:0;}
+        /*顶部样式开始*/
+        #mainTitle{
+            min-width: 350px;
+            width: 25.6%;
+            height: 100%;
+            line-height: 60px;
+            vertical-align: middle;
+            padding-left: 25px;
+            background-image: url("image/display_title_bg.png");
+            display: inline-block;
+            background-size:100%;
+        }
+        #mainTitle ~ nav{
+            display: inline-block;
+            vertical-align: middle;
+        }
+        #mainMenuList{
+            /*min-width: 1006px;*/
+            min-width: 1000px;
+            width: 74.4%;
+            float: left;
+            margin-left: 10px;
+            list-style: none;
+        }
+        #mainMenuList li{
+            /*width: 16.666%;*/
+            width: 16.66%;
+            float: left;
+            color: #ffffff;
+            /*margin-left: 10px;*/
+        }
+        #mainMenuList li a{
+            width: 86%;
+            display: inline-block;
+            vertical-align: middle;
+            text-align: center;
+            cursor: pointer;
+            padding: 2px;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+        #mainMenuList li a img{
+            width: 15px;
+            height: 15px;
+            vertical-align: middle;
+            margin-right: 5px;
+
+        }
+        #mainMenuList li a img:not(.noMargin){
+            margin-bottom: 3px;
+        }
+        #mainMenuList li>img{
+            display: inline-block;
+            vertical-align: middle;
+            width: 10%;
+        }
+        .menuLiSelected{
+            border: 1px solid rgba(233,236,6,0.5) !important;
+            color: #e9ec06;
+        }
+        /*顶部样式结束*/
+
+        /*###############################*/
+
+        /*右边半径选项开始*/
+        #rightRadiusSelectItem{
+            right: 40px;
+            top: 100px;
+            width: 80px;
+            height: 180px;
+        }
+        #rightRadiusSelectItem ul{
+            height:100%;
+            width: 100%;
+        }
+        #rightRadiusSelectItem ul li{
+            display: block;
+            width: 100%;
+            height: 40px;
+            margin-top: 20px;
+            list-style: none;
+            cursor: pointer;
+        }
+        #rightRadiusSelectItem ul li span{
+            width: 100%;
+            height: 100%;
+            line-height: 100%;
+            display: inline-block;
+            vertical-align: middle;
+            padding-top: 12px;
+            text-align: center;
+        }
+        #rightRadiusSelectItem ul li:nth-of-type(1){
+            color: #dd6b66;
+            /*border: 1px solid rgba(255,255,255,0.5);*/
+            border: 1px solid #dd6b66;
+        }
+        #rightRadiusSelectItem ul li:nth-of-type(2){
+            color: #759aa0;
+            border: 1px solid #759aa0;
+        }
+        #rightRadiusSelectItem ul li:nth-of-type(3){
+            color: #e69d87;
+            border: 1px solid #e69d87;
+        }
+        .radiusItemFirstSelected{
+            color: #ffffff !important;
+            background-color: #dd6b66;
+        }
+        .radiusItemTwoSelected{
+            color: #ffffff !important;
+            background-color: #759aa0;
+        }
+        .radiusItemThreeSelected{
+            color: #ffffff !important;
+            background-color: #e69d87;
+        }
+        /*右边半径选项结束*/
+        /*#####################################*/
+        /*左边数据统计开始*/
+        #leftDataStatistics{
+            left: 20px;
+            top: 130px;
+            width: 340px;
+            height: 420px;
+            /*background: linear-gradient(to left, #D36C67, #D36C67, #D36C67, #D36C67) left top no-repeat,*/
+            /*linear-gradient(to bottom, #D36C67, #D36C67) left top no-repeat,*/
+            /*linear-gradient(to left, #D36C67, #D36C67) right top no-repeat,*/
+            /*linear-gradient(to bottom, #D36C67, #D36C67) right top no-repeat,*/
+            /*linear-gradient(to left, #D36C67, #D36C67) left bottom no-repeat,*/
+            /*linear-gradient(to bottom, #D36C67, #D36C67) left bottom no-repeat,*/
+            /*linear-gradient(to left, #D36C67, #D36C67) right bottom no-repeat,*/
+            /*linear-gradient(to left, #D36C67, #D36C67) right bottom no-repeat;*/
+            background: linear-gradient(to left, #fff, #fff, #fff, #fff) left top no-repeat,
+            linear-gradient(to bottom, #fff, #fff) left top no-repeat,
+            linear-gradient(to left, #fff, #fff) right top no-repeat,
+            linear-gradient(to bottom, #fff, #fff) right top no-repeat,
+            linear-gradient(to left, #fff, #fff) left bottom no-repeat,
+            linear-gradient(to bottom, #fff, #fff) left bottom no-repeat,
+            linear-gradient(to left, #fff, #fff) right bottom no-repeat,
+            linear-gradient(to left, #fff, #fff) right bottom no-repeat;
+            background-size: 3px 20px, 20px 3px, 3px 20px, 20px 3px;
+        }
+        #leftDataStatistics>section{
+            width: 100%;
+            height: 100%;
+            background-color: #233340;
+            filter: alpha(Opacity=40);
+            -moz-opacity: 0.4;
+            opacity: 0.4;
+            border: 2px solid #647684;
+        }
+        #leftDataStatistics>header{
+            width: 100%;
+            height: 126px;
+            top: 0;
+            position: absolute;
+            vertical-align: middle;
+            text-align: center;
+        }
+        #leftDataStatistics>header div{
+            width: 75%;
+            height: 56px;
+            margin-top: 35px;
+            border: 1px solid #7C4F57;
+            display: inline-block;
+            color: #ffffff;
+            font-size: 24px;
+            padding-top: 10px;
+        }
+        #leftDataStatistics>article{
+            top: 126px;
+            position: absolute;
+            width: 100%;
+            height: 294px;
+        }
+        #leftDataStatistics>article>div{
+            top: 50%;
+            left: 50%;
+            width: 90%;
+            height: 90%;
+            /*居中的*/
+            position: relative;
+            transform: translate(-50%,-50%);
+            -webkit-transform: translate(-50%,-50%);
+            -moz-transform: translate(-50%,-50%);
+            -ms-transform: translate(-50%,-50%);
+        }
+        /*左边数据统计结束*/
+    </style>
+</head>
+<body>
+<!--顶部-->
+<header class="outWith mainTop elementAboveMap">
+    <h1 id="mainTitle" class="fontYellow">在线终端管理系统</h1>
+    <!--导航栏-->
+    <nav>
+        <ul id="mainMenuList">
+            <li>
+                <a class="menuLiSelected">
+                    <img src="image/station_over_li_icon_selected.png" class="noMargin">站点覆盖查询
+                </a>
+                <img src="image/white_line.png">
+            </li>
+            <li>
+                <a>
+                    <img src="image/line_goto_li_icon_normal.png">线路通达区域
+                </a>
+                <img src="image/white_line.png">
+            </li>
+            <li>
+                <a>
+                    <img src="image/passenger_flow_li_icon_normal.png">客流量查询
+                </a>
+                <img src="image/white_line.png">
+            </li>
+            <li>
+                <a>
+                    <img src="image/advocacy_route_li_icon_normal.png">拥堵路段影响线路
+                </a>
+                <img src="image/white_line.png">
+            </li>
+            <li>
+                <a>
+                    <img src="image/company_apply_li_icon_normal.png">企业运营数据
+                </a>
+                <img src="image/white_line.png">
+            </li>
+            <li>
+                <a>
+                    <img src="image/pay_channel_li_icon_normal.png">支付渠道比例图
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<!--#######################################-->
+<!--地图开始-->
+
+<section id="stationRadiatedMap" class="mapStyle">
+</section>
+<!--地图结束-->
+<!--#######################################-->
+<!--半径选项开始-->
+<aside id="rightRadiusSelectItem" class="elementAboveMap">
+    <ul>
+        <li class="one radiusItemFirstSelected"><span><strong>200</strong>米</span></li>
+        <li class="two"><span><strong>400</strong>米</span></li>
+        <li class="three"><span><strong>600</strong>米</span></li>
+    </ul>
+</aside>
+<!--半径选项结束-->
+<!--#######################################-->
+<!--左边数据统计开始-->
+<aside id="leftDataStatistics" class="elementAboveMap">
+    <section>
+    </section>
+    <!--站点总数-->
+    <header>
+        <div>
+            站点总数21万个
+        </div>
+    </header>
+    <!--站点辐射面积饼图-->
+    <article>
+        <div id="stationRadiatedAreaChart">
+
+        </div>
+    </article>
+</aside>
+<!--左边数据统计结束-->
+<script src="js/jquery.min.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=fdv5gclnF2HSnNyKm4Dj3aVuLUGMLUZ1"></script>
+<script src="js/baiduMapCommon.js"></script>
+<script src="js/baiduMapStyle.js"></script>
+<script src="js/echarts.js"></script>
+<script src="js/ticcCommon.js"></script>
+<script type="text/javascript">
+    $(function () {
+        // 获取Map实例
+        var stationRadiatedMap = baiduMapUtil.getDisplayMap("stationRadiatedMap");
+        stationRadiatedMap.setMapStyle({styleJson:baiduMapStyle});
+
+        /*顶部菜单相关开始*/
+        //菜单项
+        var menuItems = $('#mainMenuList li a');
+        menuItems.on('click',function () {
+            //先移除全部a选中样式
+            menuItems.removeClass('menuLiSelected');
+            //判断a是否有menuLiSelected样式
+            if (!$(this).hasClass('menuLiSelected')){
+                $(this).addClass('menuLiSelected');
+            }
+            setMenuListImg();
+        });
+
+        //设置菜单列表的图片
+        var setMenuListImg = function () {
+            //设置img
+             menuItems.each(function(index){
+                if ($(this).hasClass('menuLiSelected')){
+                    switch(index) {
+                        case 0:
+                            $(this).find('img').first().attr('src','image/station_over_li_icon_selected.png');
+                            break;
+                        case 1:
+                            $(this).find('img').first().attr('src','image/line_goto_li_icon_selected.png');
+                            break;
+                        case 2:
+                            $(this).find('img').first().attr('src','image/passenger_flow_li_icon_selected.png');
+                            break;
+                        case 3:
+                            $(this).find('img').first().attr('src','image/advocacy_route_li_icon_selected.png');
+                            break;
+                        case 4:
+                            $(this).find('img').first().attr('src','image/company_apply_li_icon_selected.png');
+                            break;
+                        case 5:
+                            $(this).find('img').first().attr('src','image/pay_channel_li_icon_selected.png');
+                            break;
+                    }
+                }else{
+                    switch(index) {
+                        case 0:
+                            $(this).find('img').first().attr('src','image/station_over_li_icon_normal.png');
+                            break;
+                        case 1:
+                            $(this).find('img').first().attr('src','image/line_goto_li_icon_normal.png');
+                            break;
+                        case 2:
+                            $(this).find('img').first().attr('src','image/passenger_flow_li_icon_normal.png');
+                            break;
+                        case 3:
+                            $(this).find('img').first().attr('src','image/advocacy_route_li_icon_normal.png');
+                            break;
+                        case 4:
+                            $(this).find('img').first().attr('src','image/company_apply_li_icon_normal.png');
+                            break;
+                        case 5:
+                            $(this).find('img').first().attr('src','image/pay_channel_li_icon_normal.png');
+                            break;
+                    }
+                }
+            });
+        }
+
+        /*顶部菜单相关结束*/
+
+
+
+        /*##################################*/
+
+
+
+        /*右边半径选项开始*/
+        //半径项
+        var radiusItems = $('#rightRadiusSelectItem ul li');
+        radiusItems.on('click',function () {
+            //判断是哪里一个触发的事件
+            if ($(this).hasClass('one')){
+                if (!$(this).hasClass('radiusItemFirstSelected')){
+                    $(this).addClass('radiusItemFirstSelected').addClass('selected');
+                }
+                radiusItems.eq(1).removeClass('radiusItemTwoSelected').removeClass('selected');
+                radiusItems.eq(2).removeClass('radiusItemThreeSelected').removeClass('selected');
+            }else if ($(this).hasClass('two')){
+                if (!$(this).hasClass('radiusItemTwoSelected')){
+                    $(this).addClass('radiusItemTwoSelected').addClass('selected');
+                }
+                radiusItems.eq(0).removeClass('radiusItemFirstSelected').removeClass('selected');
+                radiusItems.eq(2).removeClass('radiusItemThreeSelected').removeClass('selected');
+            }else if ($(this).hasClass('three')){
+                if (!$(this).hasClass('radiusItemThreeSelected')){
+                    $(this).addClass('radiusItemThreeSelected').addClass('selected');
+                }
+                radiusItems.eq(0).removeClass('radiusItemFirstSelected').removeClass('selected');
+                radiusItems.eq(1).removeClass('radiusItemTwoSelected').removeClass('selected');
+            }
+            //获取选中的半径
+            var radius = $(this).find('span strong').text();
+            console.log(radius);
+            //展示站点辐射到地图
+            displayStationRadiatedToMap(radius);
+            //更新左边数据统计区域
+            updateLeftDataStatistics(radius);
+        });
+        /*右边半径选项结束*/
+
+
+        /*##################################*/
+
+
+
+        /*左边数据统计数据开始*/
+        // 初始化echarts实例
+        var stationRadiatedAreaChart = echarts.init(document.getElementById('stationRadiatedAreaChart'));
+
+        var echartData = [{
+            value: 95.1,
+            name: '站点辐射面积'
+        }, {
+            value: 4.9,
+            name: '剩余面积'
+        }];
+
+        var rich = {
+            total: {
+                color: "#ffc72b",
+                fontSize: 40,
+                align: 'center'
+            }
+        };
+
+        // 指定图表的配置项和数据
+        var stationRadiatedAreaChartOption = {
+//            backgroundColor: '#031f2d',
+            /*标题组件*/
+            title: [{
+                text: '95.1%',
+                left: 'center',
+                top: '53%',
+                padding: [16, 0],
+                textStyle: {
+                    color: '#e9ec06',
+                    fontSize: 20,
+                    align: 'center'
+                }
+            }],
+            /*提示框组件*/
+            tooltip: {
+                /*触发类型*/
+                trigger: 'item',
+                formatter: "{b}:{c}({d}%)"
+                /*字符串模板
+                * 饼图、仪表盘、漏斗图: {a}（系列名称），{b}（数据项名称），{c}（数值）, {d}（百分比）
+                * */
+            },
+            /*图例组件*/
+            legend: {
+                selectedMode: false,
+                formatter: function(name) {
+                    var total = 0; //各科正确率总和
+                    echartData.forEach(function(value, index, array) {
+                        //total += value.value;
+                        total = array.length;
+                    });
+                    return '站点辐射面积\n占总面积:';
+                },
+                data: [echartData[0].name],
+                left: 'center',
+                top: 'center',
+                icon: 'none',
+                align: 'center',
+                textStyle: {
+                    color: "#fff",
+                    fontSize: 16,
+                    rich: rich
+                }
+            },
+            series: [{
+                name: '',
+                type: 'pie',
+                radius: ['45%', '70%'],
+                label: {
+                    normal: {
+                        //formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}：}{c}  {per|{d}%}  ',
+//                        formatter: '{b|{b}：}{c}  {per|{d}%}  ',
+//                        formatter: '{b|{b}：}\n{d}%',
+                        formatter: '{b|{b}：}\n{c}  km²',
+                        color:'#fff',
+                        rich: {
+                            a: {
+                                color: '#fff',
+                                lineHeight: 22,
+                                align: 'center'
+                            },
+//                            hr: {
+//                                borderColor: '#aaa',
+//                                width: '100%',
+//                                borderWidth: 0.5,
+//                                height: 0
+//                            },
+                            b: {
+                                color: '#fff',
+                                fontSize: 14,
+                                lineHeight: 22
+                            },
+                            per: {
+                                color: '#fff',
+                                backgroundColor: '#334455',
+                                padding: [2, 4],
+                                borderRadius: 2
+                            }
+                        }
+                    }
+                },
+                data: echartData,
+                color:['#D36C67', '#878787']
+
+            }]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        stationRadiatedAreaChart.setOption(stationRadiatedAreaChartOption);
+        //更新左边数据统计数据
+        var updateLeftDataStatistics = function (radius) {
+            var currentColort;
+            switch (radius){
+                case '200':
+                    currentColort = '#b15753';
+                    break;
+                case '400':
+                    currentColort = '#759aa0';
+                    break;
+                case '600':
+                    currentColort = '#e69d87';
+                    break;
+                default:
+                    currentColort = '#b15753';
+                    break;
+            }
+            //更新显示站点数量的边框颜色
+            $('#leftDataStatistics>header div').css('border-color',currentColort);
+            //设置柱状图颜色
+            stationRadiatedAreaChartOption.series[0].color[0] = currentColort;
+            // 使用刚指定的配置项和数据显示图表。
+            stationRadiatedAreaChart.setOption(stationRadiatedAreaChartOption);
+
+
+
+        };
+        /*左边数据统计数据结束*/
+
+
+        /*##############################################*/
+
+
+        /*站点辐射开始*/
+        var circles;
+        //在地图上显示站点辐射
+        var displayStationRadiatedToMap= function (currentRadius) {
+            if (!ticc.isNull(circles)){
+                //清空地图的覆盖物
+                stationRadiatedMap.clearOverlays();
+            }
+            //圆形的中心点坐标
+            var centerPoints = [];
+
+            centerPoints.push(new BMap.Point(113.338136,23.138942));
+            centerPoints.push(new BMap.Point(113.348347,23.175673));
+            centerPoints.push(new BMap.Point(113.385484,23.174454));
+            //五山路口
+            centerPoints.push(new BMap.Point(113.35111,23.14726));
+            centerPoints.push(new BMap.Point(113.359727,23.157903));
+            //圆形的半径，单位为米
+            var radius = currentRadius;
+            // var radius = [];
+            // radius.push(200);
+            // radius.push(200);
+            // $.each(data, function (index, item) {
+            //     centerPoints.push(new BMap.Point(item.inclosureCenterLng,item.inclosureCenterLat));
+            //     radius.push(item.inclosureRadius);
+            // });
+            //添加全部站点辐射
+
+            var circleOpts = genStationRadiatedOpti(radius);
+            circles = baiduMapUtil.addCircle(centerPoints,radius,circleOpts,'click',function (circle) {
+                // currSelectCircle = circle;
+                // //显示围栏车辆信息
+                // displayInclosureBusInfo(busPoints,labels);
+            });
+
+            var posIcon = new BMap.Icon(
+                // '${pageContext.request.contextPath}/ticc/common/static/images/map/map_location_icon.png',
+                'image/current_location.png',
+                new BMap.Size(15,19)
+            );
+            var markerOptions = {icon:posIcon};
+            //添加中心覆盖物
+            baiduMapUtil.addMarker(centerPoints,markerOptions);
+
+            setTimeout(function () {
+                stationRadiatedMap.setViewport(centerPoints);
+            },200);
+//                baiduMapUtil.addMarker(centerPoints);
+        };
+
+        //生成站点辐射配置项
+        var genStationRadiatedOpti = function (radius) {
+            var circleOpts;
+            switch (radius){
+                case '200':
+                    circleOpts = {
+                        strokeColor: '#b15753',//	圆形边线颜色
+                        fillColor: '#b15753',
+                        fillOpacity: 0.2,
+                        strokeWeight: 2,
+                        strokeOpacity: 0.5
+                        // enableEditing: true
+                    };
+                    break;
+                case '400':
+                    circleOpts = {
+                        strokeColor: '#759aa0',//	圆形边线颜色
+                        fillColor: '#759aa0',
+                        fillOpacity: 0.2,
+                        strokeWeight: 2,
+                        strokeOpacity: 0.5
+                        // enableEditing: true
+                    };
+                    break;
+                case '600':
+                    circleOpts = {
+                        strokeColor: '#e69d87',//	圆形边线颜色
+                        fillColor: '#e69d87',
+                        fillOpacity: 0.2,
+                        strokeWeight: 2,
+                        strokeOpacity: 0.5
+                        // enableEditing: true
+                    };
+                    break;
+                default:
+                    circleOpts = {
+                        strokeColor: '#b15753',//	圆形边线颜色
+                        fillColor: '#b15753',
+                        fillOpacity: 0.2,
+                        strokeWeight: 2,
+                        strokeOpacity: 0.5
+                        // enableEditing: true
+                    };
+                    break;
+            }
+
+            return circleOpts;
+        };
+
+
+        displayStationRadiatedToMap('200');
+
+        /*站点辐射结束*/
+    });
+</script>
+</body>
+</html>
