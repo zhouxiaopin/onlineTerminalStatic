@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>站点覆盖查询</title>
+    <title>线路通达区域</title>
 
     <style type="text/css">
         /*解决显示不了地图*/
@@ -166,98 +166,35 @@
         /*#####################################*/
 
 
-        /*左边数据统计开始*/
-        #leftDataStatistics{
-            left: 20px;
-            top: 120px;
+        /*左边搜索条件开始*/
+        #leftSearchConditionArea{
+            left: 40px;
+            top: 100px;
             width: 340px;
-            height: 480px;
-            /*background: linear-gradient(to left, #D36C67, #D36C67, #D36C67, #D36C67) left top no-repeat,*/
-            /*linear-gradient(to bottom, #D36C67, #D36C67) left top no-repeat,*/
-            /*linear-gradient(to left, #D36C67, #D36C67) right top no-repeat,*/
-            /*linear-gradient(to bottom, #D36C67, #D36C67) right top no-repeat,*/
-            /*linear-gradient(to left, #D36C67, #D36C67) left bottom no-repeat,*/
-            /*linear-gradient(to bottom, #D36C67, #D36C67) left bottom no-repeat,*/
-            /*linear-gradient(to left, #D36C67, #D36C67) right bottom no-repeat,*/
-            /*linear-gradient(to left, #D36C67, #D36C67) right bottom no-repeat;*/
-            /*background: linear-gradient(to left, #fff, #fff, #fff, #fff) left top no-repeat,*/
-            /*linear-gradient(to bottom, #fff, #fff) left top no-repeat,*/
-            /*linear-gradient(to left, #fff, #fff) right top no-repeat,*/
-            /*linear-gradient(to bottom, #fff, #fff) right top no-repeat,*/
-            /*linear-gradient(to left, #fff, #fff) left bottom no-repeat,*/
-            /*linear-gradient(to bottom, #fff, #fff) left bottom no-repeat,*/
-            /*linear-gradient(to left, #fff, #fff) right bottom no-repeat,*/
-            /*linear-gradient(to left, #fff, #fff) right bottom no-repeat;*/
-            /*background-size: 3px 20px, 20px 3px, 3px 20px, 20px 3px;*/
+            height: 50px;
+            border: 1px solid rgba(255,255,255,0.5);
         }
-        #leftDataStatistics ul{
-            width: 100%;
+        #leftSearchConditionArea form{
             height: 100%;
+            font-size: 0px;
         }
-        #leftDataStatistics ul li{
-            width: 100%;
-            height: 102px;
-            /*filter: alpha(Opacity=50);*/
-            /*-moz-opacity: 0.5;*/
-            /*opacity: 0.5;*/
-            color: #ffffff;
+        #leftSearchConditionArea form input{
+            border: none;
+            display: inline-block;
+            height: 100%;
+            background: none;
+            color: #FFFFFF;
             font-size: 16px;
-            border: 2px solid #647684;
-            list-style: none;
-            border-radius: 8px;
         }
-        #leftDataStatistics ul li:not(.one){
-            margin-top: 24px;
-        }
-        #leftDataStatistics ul li p{
-            width: 100%;
+        #leftSearchConditionArea form input:nth-of-type(1){
+            width: 80%;
             padding-left: 20px;
-            padding-right: 20px;
         }
-        #leftDataStatistics ul li.one p:nth-of-type(1){
-            padding-top: 18px;
+        #leftSearchConditionArea form input:nth-of-type(2){
+            width: 20%;
+            border-left: 1px solid rgba(255,255,255,0.5);
         }
-        #leftDataStatistics ul li.one p:nth-of-type(2){
-            padding-top: 10px;
-        }
-        #leftDataStatistics ul li.one p{
-            height: 50%;
-        }
-        #leftDataStatistics ul li p:not(.percentageProgress)>span:nth-child(even){
-            display: block;
-            float: right;
-        }
-        #leftDataStatistics ul li:not(.one) p:nth-of-type(1){
-            padding-top: 11px;
-        }
-        #leftDataStatistics ul li:not(.one) p:nth-child(n+2){
-            padding-top: 6px;
-        }
-        #leftDataStatistics ul li p.percentageProgress span{
-            margin-top: 6px;
-            border-radius: 6px;
-            display: block;
-        }
-        #leftDataStatistics ul li p.percentageProgress span:nth-of-type(1){
-            height: 6px;
-            width: 100%;
-            background-color: #ffffff;
-        }
-        #leftDataStatistics ul li p.percentageProgress span:nth-of-type(2){
-            height: 10px;
-            width: 50%;
-            margin-top: -8px;
-        }
-        #leftDataStatistics ul li:nth-of-type(2) p.percentageProgress span:nth-of-type(2){
-            background-color: #dd6b66;
-        }
-        #leftDataStatistics ul li:nth-of-type(3) p.percentageProgress span:nth-of-type(2){
-            background-color: #759aa0;
-        }
-        #leftDataStatistics ul li:nth-of-type(4) p.percentageProgress span:nth-of-type(2){
-            background-color: #e69d87;
-        }
-        /*左边数据统计结束*/
+        /*左边搜索条件结束*/
     </style>
 </head>
 <body>
@@ -268,13 +205,13 @@
     <nav>
         <ul id="mainMenuList">
             <li>
-                <a class="menuLiSelected">
+                <a >
                     <img src="image/station_over_li_icon_selected.png" class="noMargin">站点覆盖查询
                 </a>
                 <img src="image/white_line.png">
             </li>
             <li>
-                <a>
+                <a class="menuLiSelected">
                     <img src="image/line_goto_li_icon_normal.png">线路通达区域
                 </a>
                 <img src="image/white_line.png">
@@ -332,64 +269,14 @@
 <!--#######################################-->
 
 
-<!--左边数据统计开始-->
-<aside id="leftDataStatistics" class="elementAboveMap">
-    <ul>
-        <li class="one">
-            <p>
-                <span>站点总数：</span>
-                <span class="fontYellow"><span>857</span>万个</span>
-            </p>
-            <p>
-                <span>总面积：</span>
-                <span class="fontYellow"><span>9354</span>km²</span>
-            </p>
-        </li>
-        <li class="two">
-            <p>
-                <span>站点200米辐射面积：</span>
-                <span class="fontYellow"><span>912</span>km²</span>
-            </p>
-            <p>
-                <span>站点200米辐射面积占总面积：</span>
-                <span class="fontYellow"><span>95.2</span>%</span>
-            </p>
-            <p class="percentageProgress">
-                <span></span>
-                <span></span>
-            </p>
-        </li>
-        <li class="three">
-            <p>
-                <span>站点400米辐射面积：</span>
-                <span class="fontYellow"><span>912</span>km²</span>
-            </p>
-            <p>
-                <span>站点400米辐射面积占总面积：</span>
-                <span class="fontYellow"><span>95.2</span>%</span>
-            </p>
-            <p class="percentageProgress">
-                <span></span>
-                <span></span>
-            </p>
-        </li>
-        <li class="four">
-            <p>
-                <span>站点600米辐射面积：</span>
-                <span class="fontYellow"><span>912</span>km²</span>
-            </p>
-            <p>
-                <span>站点600米辐射面积占总面积：</span>
-                <span class="fontYellow"><span>95.2</span>%</span>
-            </p>
-            <p class="percentageProgress">
-                <span></span>
-                <span></span>
-            </p>
-        </li>
-    </ul>
+<!--左边搜索条件开始-->
+<aside id="leftSearchConditionArea" class="elementAboveMap">
+    <form>
+        <input type="text" value="请输入站点">
+        <input type="button" value="GO">
+    </form>
 </aside>
-<!--左边数据统计结束-->
+<!--左边搜索条件结束-->
 <script src="js/jquery.min.js"></script>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=fdv5gclnF2HSnNyKm4Dj3aVuLUGMLUZ1"></script>
 <script src="js/baiduMapCommon.js"></script>
@@ -510,42 +397,10 @@
 
 
 
-        /*左边数据统计数据开始*/
-
-        var initLeftDataStatistics = function () {
-            //设置站点总数
-            $('#leftDataStatistics ul li.one p:nth-child(1)>span:nth-child(2)>span:nth-child(1)').text('1');
-            //设置总面积
-            $('#leftDataStatistics ul li.one p:nth-child(2)>span:nth-child(2)>span:nth-child(1)').text('2');
+        /*左边搜索条件开始*/
 
 
-            /*200米相关*/
-            //设置200米站点辐射面积
-            $('#leftDataStatistics ul li.two p:nth-child(1)>span:nth-child(2)>span:nth-child(1)').text('3');
-            //设置200米站点辐射面积占总面积
-            $('#leftDataStatistics ul li.two p:nth-child(2)>span:nth-child(2)>span:nth-child(1)').text('4');
-            //设置200米站点辐射面积占总面积的进度
-            $('#leftDataStatistics ul li.two p.percentageProgress>span:nth-child(2)').css('width','4%');
-
-            /*400米相关*/
-            //设置400米站点辐射面积
-            $('#leftDataStatistics ul li.three p:nth-child(1)>span:nth-child(2)>span:nth-child(1)').text('6');
-            //设置400米站点辐射面积占总面积
-            $('#leftDataStatistics ul li.three p:nth-child(2)>span:nth-child(2)>span:nth-child(1)').text('7');
-            //设置400米站点辐射面积占总面积的进度
-            $('#leftDataStatistics ul li.three p.percentageProgress>span:nth-child(2)').css('width','7%');
-
-            /*600米相关*/
-            //设置600米站点辐射面积
-            $('#leftDataStatistics ul li.four p:nth-child(1)>span:nth-child(2)>span:nth-child(1)').text('9');
-            //设置600米站点辐射面积占总面积
-            $('#leftDataStatistics ul li.four p:nth-child(2)>span:nth-child(2)>span:nth-child(1)').text('10');
-            //设置600米站点辐射面积占总面积的进度
-            $('#leftDataStatistics ul li.four p.percentageProgress>span:nth-child(2)').css('width','11%');
-
-        };
-
-        /*左边数据统计数据结束*/
+        /*左边搜索条件结束*/
 
 
         /*##############################################*/
@@ -652,7 +507,6 @@
 
 
         displayStationRadiatedToMap('200');
-        initLeftDataStatistics();
         /*站点辐射结束*/
     });
 </script>
