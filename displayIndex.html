@@ -42,7 +42,8 @@
             -moz-opacity: 0.8;
             opacity: 0.8;
         }
-        #stationOverMap{width: 100%;height: 100%;overflow: hidden;margin:0;}
+        /*地图通用样式*/
+        .mapStyle{width: 100%;height: 100%;overflow: hidden;margin:0;}
         /*顶部样式开始*/
         #mainTitle{
             min-width: 350px;
@@ -167,14 +168,22 @@
             top: 130px;
             width: 340px;
             height: 420px;
-            background: linear-gradient(to left, #D36C67, #D36C67, #D36C67, #D36C67) left top no-repeat,
-            linear-gradient(to bottom, #D36C67, #D36C67) left top no-repeat,
-            linear-gradient(to left, #D36C67, #D36C67) right top no-repeat,
-            linear-gradient(to bottom, #D36C67, #D36C67) right top no-repeat,
-            linear-gradient(to left, #D36C67, #D36C67) left bottom no-repeat,
-            linear-gradient(to bottom, #D36C67, #D36C67) left bottom no-repeat,
-            linear-gradient(to left, #D36C67, #D36C67) right bottom no-repeat,
-            linear-gradient(to left, #D36C67, #D36C67) right bottom no-repeat;
+            /*background: linear-gradient(to left, #D36C67, #D36C67, #D36C67, #D36C67) left top no-repeat,*/
+            /*linear-gradient(to bottom, #D36C67, #D36C67) left top no-repeat,*/
+            /*linear-gradient(to left, #D36C67, #D36C67) right top no-repeat,*/
+            /*linear-gradient(to bottom, #D36C67, #D36C67) right top no-repeat,*/
+            /*linear-gradient(to left, #D36C67, #D36C67) left bottom no-repeat,*/
+            /*linear-gradient(to bottom, #D36C67, #D36C67) left bottom no-repeat,*/
+            /*linear-gradient(to left, #D36C67, #D36C67) right bottom no-repeat,*/
+            /*linear-gradient(to left, #D36C67, #D36C67) right bottom no-repeat;*/
+            background: linear-gradient(to left, #fff, #fff, #fff, #fff) left top no-repeat,
+            linear-gradient(to bottom, #fff, #fff) left top no-repeat,
+            linear-gradient(to left, #fff, #fff) right top no-repeat,
+            linear-gradient(to bottom, #fff, #fff) right top no-repeat,
+            linear-gradient(to left, #fff, #fff) left bottom no-repeat,
+            linear-gradient(to bottom, #fff, #fff) left bottom no-repeat,
+            linear-gradient(to left, #fff, #fff) right bottom no-repeat,
+            linear-gradient(to left, #fff, #fff) right bottom no-repeat;
             background-size: 3px 20px, 20px 3px, 3px 20px, 20px 3px;
         }
         #leftDataStatistics>section{
@@ -273,7 +282,7 @@
 <!--#######################################-->
 <!--地图开始-->
 
-<section id="stationOverMap">
+<section id="stationRadiatedMap" class="mapStyle">
 </section>
 <!--地图结束-->
 <!--#######################################-->
@@ -310,11 +319,12 @@
 <script src="js/baiduMapCommon.js"></script>
 <script src="js/baiduMapStyle.js"></script>
 <script src="js/echarts.js"></script>
+<script src="js/ticcCommon.js"></script>
 <script type="text/javascript">
     $(function () {
         // 获取Map实例
-        var stationOverMap = baiduMapUtil.getDisplayMap("stationOverMap");
-        stationOverMap.setMapStyle({styleJson:baiduMapStyle});
+        var stationRadiatedMap = baiduMapUtil.getDisplayMap("stationRadiatedMap");
+        stationRadiatedMap.setMapStyle({styleJson:baiduMapStyle});
 
         /*顶部菜单相关开始*/
         //菜单项
@@ -381,7 +391,11 @@
 
         /*顶部菜单相关结束*/
 
+
+
         /*##################################*/
+
+
 
         /*右边半径选项开始*/
         //半径项
@@ -410,9 +424,17 @@
             //获取选中的半径
             var radius = $(this).find('span strong').text();
             console.log(radius);
+            //展示站点辐射到地图
+            displayStationRadiatedToMap(radius);
+            //更新左边数据统计区域
+            updateLeftDataStatistics(radius);
         });
         /*右边半径选项结束*/
+
+
         /*##################################*/
+
+
 
         /*左边数据统计数据开始*/
         // 初始化echarts实例
@@ -435,7 +457,7 @@
         };
 
         // 指定图表的配置项和数据
-        var option = {
+        var stationRadiatedAreaChartOption = {
 //            backgroundColor: '#031f2d',
             /*标题组件*/
             title: [{
@@ -522,10 +544,142 @@
 
             }]
         };
-
         // 使用刚指定的配置项和数据显示图表。
-        stationRadiatedAreaChart.setOption(option);
+        stationRadiatedAreaChart.setOption(stationRadiatedAreaChartOption);
+        //更新左边数据统计数据
+        var updateLeftDataStatistics = function (radius) {
+            var currentColort;
+            switch (radius){
+                case '200':
+                    currentColort = '#b15753';
+                    break;
+                case '400':
+                    currentColort = '#759aa0';
+                    break;
+                case '600':
+                    currentColort = '#e69d87';
+                    break;
+                default:
+                    currentColort = '#b15753';
+                    break;
+            }
+            //更新显示站点数量的边框颜色
+            $('#leftDataStatistics>header div').css('border-color',currentColort);
+            //设置柱状图颜色
+            stationRadiatedAreaChartOption.series[0].color[0] = currentColort;
+            // 使用刚指定的配置项和数据显示图表。
+            stationRadiatedAreaChart.setOption(stationRadiatedAreaChartOption);
+
+        };
         /*左边数据统计数据结束*/
+
+
+        /*##############################################*/
+
+
+        /*站点辐射开始*/
+        var circles;
+        //在地图上显示站点辐射
+        var displayStationRadiatedToMap= function (currentRadius) {
+            if (!ticc.isNull(circles)){
+                //清空地图的覆盖物
+                stationRadiatedMap.clearOverlays();
+            }
+            //圆形的中心点坐标
+            var centerPoints = [];
+
+            centerPoints.push(new BMap.Point(113.338136,23.138942));
+            centerPoints.push(new BMap.Point(113.348347,23.175673));
+            centerPoints.push(new BMap.Point(113.385484,23.174454));
+            //五山路口
+            centerPoints.push(new BMap.Point(113.35111,23.14726));
+            centerPoints.push(new BMap.Point(113.359727,23.157903));
+            //圆形的半径，单位为米
+            var radius = currentRadius;
+            // var radius = [];
+            // radius.push(200);
+            // radius.push(200);
+            // $.each(data, function (index, item) {
+            //     centerPoints.push(new BMap.Point(item.inclosureCenterLng,item.inclosureCenterLat));
+            //     radius.push(item.inclosureRadius);
+            // });
+            //添加全部站点辐射
+
+            var circleOpts = genStationRadiatedOpti(radius);
+            circles = baiduMapUtil.addCircle(centerPoints,radius,circleOpts,'click',function (circle) {
+                // currSelectCircle = circle;
+                // //显示围栏车辆信息
+                // displayInclosureBusInfo(busPoints,labels);
+            });
+
+            var posIcon = new BMap.Icon(
+                // '${pageContext.request.contextPath}/ticc/common/static/images/map/map_location_icon.png',
+                'image/current_location.png',
+                new BMap.Size(15,19)
+            );
+            var markerOptions = {icon:posIcon};
+            //添加中心覆盖物
+            baiduMapUtil.addMarker(centerPoints,markerOptions);
+
+            setTimeout(function () {
+                stationRadiatedMap.setViewport(centerPoints);
+            },200);
+//                baiduMapUtil.addMarker(centerPoints);
+        };
+
+        //生成站点辐射配置项
+        var genStationRadiatedOpti = function (radius) {
+            var circleOpts;
+            switch (radius){
+                case '200':
+                    circleOpts = {
+                        strokeColor: '#b15753',//	圆形边线颜色
+                        fillColor: '#b15753',
+                        fillOpacity: 0.2,
+                        strokeWeight: 2,
+                        strokeOpacity: 0.5
+                        // enableEditing: true
+                    };
+                    break;
+                case '400':
+                    circleOpts = {
+                        strokeColor: '#759aa0',//	圆形边线颜色
+                        fillColor: '#759aa0',
+                        fillOpacity: 0.2,
+                        strokeWeight: 2,
+                        strokeOpacity: 0.5
+                        // enableEditing: true
+                    };
+                    break;
+                case '600':
+                    circleOpts = {
+                        strokeColor: '#e69d87',//	圆形边线颜色
+                        fillColor: '#e69d87',
+                        fillOpacity: 0.2,
+                        strokeWeight: 2,
+                        strokeOpacity: 0.5
+                        // enableEditing: true
+                    };
+                    break;
+                default:
+                    circleOpts = {
+                        strokeColor: '#b15753',//	圆形边线颜色
+                        fillColor: '#b15753',
+                        fillOpacity: 0.2,
+                        strokeWeight: 2,
+                        strokeOpacity: 0.5
+                        // enableEditing: true
+                    };
+                    break;
+            }
+
+            return circleOpts;
+        };
+
+
+        displayStationRadiatedToMap('200');
+
+        /*站点辐射结束*/
     });
 </script>
 </body>

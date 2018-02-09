@@ -316,7 +316,13 @@ window.baiduMapUtil = function(){
                 for (var i = 0, len = centers.length; i < len; i++){
                     var center = centers[i];
                     //圆形的半径，单位为米
-                    var myRadius = radius[i];
+                    // var myRadius = radius[i];
+                    var myRadius;
+                    if (radius instanceof Array){
+                        myRadius = radius[i];
+                    }else{
+                        myRadius = radius;
+                    }
                     var circle;
                     if (null != opts && undefined != opts){
                         circle = new BMap.Circle(center, myRadius, opts);
