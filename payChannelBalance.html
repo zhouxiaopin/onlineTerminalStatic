@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>线路通达区域</title>
+    <title>支付渠道比例图</title>
 
     <style type="text/css">
         /*解决显示不了地图*/
@@ -125,91 +125,69 @@
 
         /*###############################*/
 
-        /*右边半径选项开始*/
-        #rightLineColorExplain{
-            right: 40px;
-            top: 100px;
-            width: 300px;
-            height: 250px;
+        /*统计显示开始*/
+        .payChannelBalanceStatisticsArea{
+            width: 90%;
+            height: 85%;
+            /*background-color: #dd6b66;*/
+            /*居中*/
+            margin: auto;
+            top: 60px;
+            left: 0;
+            bottom: 0;
+            right: 0;
         }
-        #rightLineColorExplain table{
-            height:100%;
-            width: 100%;
-            border: 1px solid rgba(255,255,255,0.5);
-            border-collapse: collapse;
-            text-align: center;
-            color: #ffffff;
-        }
-        #rightLineColorExplain table,#rightLineColorExplain table tr th, #rightLineColorExplain table tr td {
-            border: 1px solid rgba(255,255,255,0.5);
-        }
-        #rightLineColorExplain table tr td{
-            font-size: 12px;
-        }
-        #rightLineColorExplain table tr:nth-child(odd){
-            background-color: rgba(255,255,255,0.2);
-        }
-        #rightLineColorExplain table tr:nth-child(even){
-            background-color: rgba(255,255,255,0.1);
-        }
-        #rightLineColorExplain table tr th:nth-of-type(1){
-            width: 30%;
-        }
-        #rightLineColorExplain table tr td:nth-of-type(1) span{
-            display: inline-block;
-            width: 50%;
-            height: 30%;
-        }
-        #rightLineColorExplain table tr.two td:nth-of-type(1) span{
-            background-color: #F91050;
-        }
-        #rightLineColorExplain table tr.three td:nth-of-type(1) span{
-            background-color: #F3F606;
-        }
-        #rightLineColorExplain table tr.four td:nth-of-type(1) span{
-            background-color: #10FDF5;
-        }
-        #rightLineColorExplain table tr.five td:nth-of-type(1) span{
-            background-color: #0CF496;
-        }
-        /*右边半径选项结束*/
-
-
-        /*#####################################*/
-
-
-        /*左边搜索条件开始*/
-        #leftSearchConditionArea{
-            left: 40px;
-            top: 100px;
-            width: 340px;
-            height: 50px;
-            border: 1px solid rgba(255,255,255,0.5);
-        }
-        #leftSearchConditionArea form{
+        .payChannelBalanceStatisticsArea>section{
+            position: absolute;
+            width: 49%;
             height: 100%;
-            font-size: 0px;
-        }
-        #leftSearchConditionArea form input{
-            border: none;
-            display: inline-block;
-            height: 100%;
-            background: none;
+            top: 0;
             color: #FFFFFF;
-            font-size: 16px;
-
+            border: 2px solid rgba(255,255,255,0.5);
         }
-        #leftSearchConditionArea form input:nth-of-type(1){
-            width: 80%;
-            padding-left: 20px;
+        .payChannelBalanceStatisticsArea>section:nth-of-type(1){
+            /*background-color: #e9ec06;*/
+            left: 0;
         }
-        #leftSearchConditionArea form input:nth-of-type(2){
-            width: 20%;
-            border-left: 1px solid rgba(255,255,255,0.5);
-            cursor:pointer;
+        .payChannelBalanceStatisticsArea>section:nth-of-type(2){
+            /*background-color: #e69d87;*/
+            right: 0;
         }
-        #leftSearchConditionArea form input:focus { outline: none; }
-        /*左边搜索条件结束*/
+        .payChannelBalanceStatisticsArea>section>header{
+            width: 100%;
+            height:8%;
+            text-align: center;
+            background-color: rgba(255,255,255,0.4);
+            font-size: 18px;
+            vertical-align: middle;
+            border-bottom: 2px solid rgba(255,255,255,0.5);
+        }
+        .payChannelBalanceStatisticsArea>section>header>span{
+            width: 100%;
+            height: 100%;
+            padding-top: 10px;
+            display: inline-block;
+           vertical-align: middle;
+        }
+        .payChannelBalanceStatisticsArea>section>section{
+            height:92%;
+            background-color: rgba(255,255,255,0.2);
+            font-size: 14px;
+        }
+        #payChannelBalanceChart{
+            top: 50%;
+            left: 50%;
+            width: 90%;
+            height: 90%;
+            /*居中的*/
+            position: relative;
+            transform: translate(-50%,-50%);
+            -webkit-transform: translate(-50%,-50%);
+            -moz-transform: translate(-50%,-50%);
+            -ms-transform: translate(-50%,-50%);
+        }
+        /*统计显示结束*/
+      
     </style>
 </head>
 <body>
@@ -262,55 +240,32 @@
 <!--#######################################-->
 
 <!--地图开始-->
-<section id="lineGotoAreaMap" class="mapStyle">
+<section id="payChannelBalanceMap" class="mapStyle">
 </section>
 <!--地图结束-->
 
-
 <!--#######################################-->
 
+<!--统计显示开始-->
+<div class="payChannelBalanceStatisticsArea elementAboveMap">
+    <!--支付类型分析-->
+    <section>
+        <header><span>支付类型分析</span></header>
+        <section>
+            <div id="payChannelBalanceChart">
 
-<!--半径选项开始-->
-<aside id="rightLineColorExplain" class="elementAboveMap">
-    <table>
-        <tbody>
-            <tr class="one">
-                <th>线路颜色</th>
-                <th>线路客流量说明</th>
-            </tr>
-            <tr class="two">
-                <td><span></span></td>
-                <td>客流量≥20万人/小时</td>
-            </tr>
-            <tr class="three">
-                <td><span></span></td>
-                <td>20万人/小时&lt; 客流量≥15万人/小时</td>
-            </tr>
-            <tr class="four">
-                <td><span></span></td>
-                <td>15万人/小时&lt; 客流量≥10万人/小时</td>
-            </tr>
-            <tr class="five">
-                <td><span></span></td>
-                <td>客流量&gt; 万人/小时</td>
-            </tr>
-        </tbody>
-    </table>
-</aside>
-<!--半径选项结束-->
+            </div>
+        </section>
+    </section>
+    <!--羊城通卡刷卡类型-->
+    <section>
+        <header><span>羊城通卡刷卡类型</span></header>
+        <section>
+        </section>
+    </section>
+</div>
+<!--统计显示结束-->
 
-
-<!--#######################################-->
-
-
-<!--左边搜索条件开始-->
-<aside id="leftSearchConditionArea" class="elementAboveMap">
-    <form>
-        <input type="text" placeholder="请输入站点">
-        <input type="button" value="GO">
-    </form>
-</aside>
-<!--左边搜索条件结束-->
 <script src="js/jquery.min.js"></script>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=fdv5gclnF2HSnNyKm4Dj3aVuLUGMLUZ1"></script>
 <script src="js/baiduMapCommon.js"></script>
@@ -320,8 +275,8 @@
 <script type="text/javascript">
     $(function () {
         // 获取Map实例
-        var lineGotoAreaMap = baiduMapUtil.getDisplayMap("lineGotoAreaMap");
-        lineGotoAreaMap.setMapStyle({styleJson:baiduMapStyle});
+        var payChannelBalanceMap = baiduMapUtil.getDisplayMap("payChannelBalanceMap");
+        payChannelBalanceMap.setMapStyle({styleJson:baiduMapStyle});
 
         /*顶部菜单相关开始*/
         //菜单项
@@ -393,50 +348,125 @@
         /*##################################*/
 
 
+        /*支付类型分析饼状图开始*/
+        // 初始化echarts实例
+        var payChannelBalanceChart = echarts.init(document.getElementById('payChannelBalanceChart'));
+        var echartData = [{
+            value: 53,
+            name: '羊城通卡'
+        }, {
+            value: 5,
+            name: '现金'
+        }, {
+            value: 34,
+            name: '二维码'
+        }, {
+            value: 45,
+            name: '银联IC卡'
+        }];
 
-        /*左边搜索条件开始*/
-
-
-        /*左边搜索条件结束*/
-
-
-        /*##############################################*/
-
-
-        /*站点辐射开始*/
-        var stationMaker;
-        //在地图上显示站点辐射
-        var displayStationToMap= function () {
-            if (!ticc.isNull(stationMaker)){
-                //清空地图的覆盖物
-                lineGotoAreaMap.clearOverlays();
+        var rich = {
+            total: {
+                color: "#ffc72b",
+                fontSize: 40,
+                align: 'center'
             }
-            //圆形的中心点坐标
-            var stationPoints = [];
-
-            stationPoints.push(new BMap.Point(113.338136,23.138942));
-            stationPoints.push(new BMap.Point(113.348347,23.175673));
-            stationPoints.push(new BMap.Point(113.385484,23.174454));
-            //五山路口
-            stationPoints.push(new BMap.Point(113.35111,23.14726));
-            stationPoints.push(new BMap.Point(113.359727,23.157903));
-
-            var posIcon = new BMap.Icon(
-                // '${pageContext.request.contextPath}/ticc/common/static/images/map/map_location_icon.png',
-                'image/current_location.png',
-                new BMap.Size(15,19)
-            );
-            var markerOptions = {icon:posIcon};
-            //添加中心覆盖物
-            stationMaker = baiduMapUtil.addMarker(stationPoints,markerOptions);
-
-            setTimeout(function () {
-                lineGotoAreaMap.setViewport(stationPoints);
-            },200);
         };
 
-        displayStationToMap();
-        /*站点辐射结束*/
+        // 指定图表的配置项和数据
+        var payChannelBalanceChartOption = {
+//            backgroundColor: '#031f2d',
+            /*标题组件*/
+            title: [{
+                text: '85.00\n万次',
+                left: 'center',
+                top: '45%',
+                padding: [16, 0],
+                textStyle: {
+                    color: '#e9ec06',
+                    fontSize: 20,
+                    align: 'center'
+                }
+            }],
+            /*提示框组件*/
+            tooltip: {
+                /*触发类型*/
+                trigger: 'item',
+                formatter: "{b}:{c}({d}%)"
+                /*字符串模板
+                * 饼图、仪表盘、漏斗图: {a}（系列名称），{b}（数据项名称），{c}（数值）, {d}（百分比）
+                * */
+            },
+            /*图例组件*/
+            legend: {
+                selectedMode: false,
+                formatter: function(name) {
+                    var total = 0; //各科正确率总和
+                    echartData.forEach(function(value, index, array) {
+                        //total += value.value;
+                        total = array.length;
+                    });
+                    return '支付总数：';
+                },
+                data: [echartData[0].name],
+                left: 'center',
+                top: '43%',
+                icon: 'none',
+                align: 'center',
+                textStyle: {
+                    color: "#fff",
+                    fontSize: 16,
+                    rich: rich
+                }
+            },
+            series: [{
+                name: '',
+                type: 'pie',
+                radius: ['25%', '45%'],
+                label: {
+                    normal: {
+                        //formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}：}{c}  {per|{d}%}  ',
+//                        formatter: '{b|{b}：}{c}  {per|{d}%}  ',
+                       formatter: '{b|{b}：{c}万次}\n{d}%',
+                        // formatter: '{b|{b}：}\n{c}  km²',
+                        color:'#fff',
+                        rich: {
+                            a: {
+                                color: '#fff',
+                                lineHeight: 22,
+                                align: 'center'
+                            },
+//                            hr: {
+//                                borderColor: '#aaa',
+//                                width: '100%',
+//                                borderWidth: 0.5,
+//                                height: 0
+//                            },
+                            b: {
+                                color: '#fff',
+                                fontSize: 14,
+                                lineHeight: 22
+                            },
+                            per: {
+                                color: '#fff',
+                                backgroundColor: '#334455',
+                                padding: [2, 4],
+                                borderRadius: 2
+                            }
+                        }
+                    }
+                },
+                data: echartData,
+                color:['#DD6B66', '#EEDD78','#E69D87','#759AA0']
+
+            }]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        payChannelBalanceChart.setOption(payChannelBalanceChartOption);
+        /*支付类型分析饼状图结束*/
+
+
+
     });
 </script>
 </body>
