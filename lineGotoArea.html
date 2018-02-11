@@ -22,6 +22,23 @@
             padding: 0;
             /*border: none;*/
         }
+
+        :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+            color: #FFFFFF; opacity:0.8;
+        }
+
+        ::-moz-placeholder { /* Mozilla Firefox 19+ */
+            color: #FFFFFF;opacity:0.8;
+        }
+
+        input:-ms-input-placeholder{
+            color: #FFFFFF;opacity:0.8;
+        }
+
+        input::-webkit-input-placeholder{
+            color: #FFFFFF;opacity:0.8;
+        }
+
         .fontYellow{
             color: #e9ec06;
         }
@@ -32,6 +49,7 @@
             position: absolute;
         }
         .outWith{
+
             min-width: 1366px;
             width: 100%;
         }
@@ -108,57 +126,51 @@
         /*###############################*/
 
         /*右边半径选项开始*/
-        #rightRadiusSelectItem{
+        #rightLineColorExplain{
             right: 40px;
             top: 100px;
-            width: 80px;
-            height: 180px;
+            width: 300px;
+            height: 250px;
         }
-        #rightRadiusSelectItem ul{
+        #rightLineColorExplain table{
             height:100%;
             width: 100%;
-        }
-        #rightRadiusSelectItem ul li{
-            display: block;
-            width: 100%;
-            height: 40px;
-            margin-top: 20px;
-            list-style: none;
-            cursor: pointer;
-        }
-        #rightRadiusSelectItem ul li span{
-            width: 100%;
-            height: 100%;
-            line-height: 100%;
-            display: inline-block;
-            vertical-align: middle;
-            padding-top: 12px;
+            border: 1px solid rgba(256,256,256,0.5);
+            border-collapse: collapse;
             text-align: center;
+            color: #ffffff;
         }
-        #rightRadiusSelectItem ul li:nth-of-type(1){
-            color: #dd6b66;
-            /*border: 1px solid rgba(255,255,255,0.5);*/
-            border: 1px solid #dd6b66;
+        #rightLineColorExplain table,#rightLineColorExplain table tr th, #rightLineColorExplain table tr td {
+            border: 1px solid rgba(256,256,256,0.5);
         }
-        #rightRadiusSelectItem ul li:nth-of-type(2){
-            color: #759aa0;
-            border: 1px solid #759aa0;
+        #rightLineColorExplain table tr td{
+            font-size: 12px;
         }
-        #rightRadiusSelectItem ul li:nth-of-type(3){
-            color: #e69d87;
-            border: 1px solid #e69d87;
+        #rightLineColorExplain table tr:nth-child(odd){
+            background-color: rgba(256,256,256,0.2);
         }
-        .radiusItemFirstSelected{
-            color: #ffffff !important;
-            background-color: #dd6b66;
+        #rightLineColorExplain table tr:nth-child(even){
+            background-color: rgba(256,256,256,0.1);
         }
-        .radiusItemTwoSelected{
-            color: #ffffff !important;
-            background-color: #759aa0;
+        #rightLineColorExplain table tr th:nth-of-type(1){
+            width: 30%;
         }
-        .radiusItemThreeSelected{
-            color: #ffffff !important;
-            background-color: #e69d87;
+        #rightLineColorExplain table tr td:nth-of-type(1) span{
+            display: inline-block;
+            width: 50%;
+            height: 30%;
+        }
+        #rightLineColorExplain table tr.two td:nth-of-type(1) span{
+            background-color: #F91050;
+        }
+        #rightLineColorExplain table tr.three td:nth-of-type(1) span{
+            background-color: #F3F606;
+        }
+        #rightLineColorExplain table tr.four td:nth-of-type(1) span{
+            background-color: #10FDF5;
+        }
+        #rightLineColorExplain table tr.five td:nth-of-type(1) span{
+            background-color: #0CF496;
         }
         /*右边半径选项结束*/
 
@@ -194,7 +206,9 @@
         #leftSearchConditionArea form input:nth-of-type(2){
             width: 20%;
             border-left: 1px solid rgba(255,255,255,0.5);
+            cursor:pointer;
         }
+        #leftSearchConditionArea form input:focus { outline: none; }
         /*左边搜索条件结束*/
     </style>
 </head>
@@ -248,7 +262,7 @@
 <!--#######################################-->
 
 <!--地图开始-->
-<section id="stationRadiatedMap" class="mapStyle">
+<section id="lineGotoAreaMap" class="mapStyle">
 </section>
 <!--地图结束-->
 
@@ -257,12 +271,31 @@
 
 
 <!--半径选项开始-->
-<aside id="rightRadiusSelectItem" class="elementAboveMap">
-    <ul>
-        <li class="one radiusItemFirstSelected"><span><strong>200</strong>米</span></li>
-        <li class="two"><span><strong>400</strong>米</span></li>
-        <li class="three"><span><strong>600</strong>米</span></li>
-    </ul>
+<aside id="rightLineColorExplain" class="elementAboveMap">
+    <table>
+        <tbody>
+            <tr class="one">
+                <th>线路颜色</th>
+                <th>线路客流量说明</th>
+            </tr>
+            <tr class="two">
+                <td><span></span></td>
+                <td>客流量≥20万人/小时</td>
+            </tr>
+            <tr class="three">
+                <td><span></span></td>
+                <td>20万人/小时&lt; 客流量≥15万人/小时</td>
+            </tr>
+            <tr class="four">
+                <td><span></span></td>
+                <td>15万人/小时&lt; 客流量≥10万人/小时</td>
+            </tr>
+            <tr class="five">
+                <td><span></span></td>
+                <td>客流量&gt; 万人/小时</td>
+            </tr>
+        </tbody>
+    </table>
 </aside>
 <!--半径选项结束-->
 
@@ -273,7 +306,7 @@
 <!--左边搜索条件开始-->
 <aside id="leftSearchConditionArea" class="elementAboveMap">
     <form>
-        <input type="text" value="请输入站点">
+        <input type="text" placeholder="请输入站点">
         <input type="button" value="GO">
     </form>
 </aside>
@@ -287,8 +320,8 @@
 <script type="text/javascript">
     $(function () {
         // 获取Map实例
-        var stationRadiatedMap = baiduMapUtil.getDisplayMap("stationRadiatedMap");
-        stationRadiatedMap.setMapStyle({styleJson:baiduMapStyle});
+        var lineGotoAreaMap = baiduMapUtil.getDisplayMap("lineGotoAreaMap");
+        lineGotoAreaMap.setMapStyle({styleJson:baiduMapStyle});
 
         /*顶部菜单相关开始*/
         //菜单项
@@ -362,35 +395,6 @@
 
 
         /*右边半径选项开始*/
-        //半径项
-        var radiusItems = $('#rightRadiusSelectItem ul li');
-        radiusItems.on('click',function () {
-            //判断是哪里一个触发的事件
-            if ($(this).hasClass('one')){
-                if (!$(this).hasClass('radiusItemFirstSelected')){
-                    $(this).addClass('radiusItemFirstSelected').addClass('selected');
-                }
-                radiusItems.eq(1).removeClass('radiusItemTwoSelected').removeClass('selected');
-                radiusItems.eq(2).removeClass('radiusItemThreeSelected').removeClass('selected');
-            }else if ($(this).hasClass('two')){
-                if (!$(this).hasClass('radiusItemTwoSelected')){
-                    $(this).addClass('radiusItemTwoSelected').addClass('selected');
-                }
-                radiusItems.eq(0).removeClass('radiusItemFirstSelected').removeClass('selected');
-                radiusItems.eq(2).removeClass('radiusItemThreeSelected').removeClass('selected');
-            }else if ($(this).hasClass('three')){
-                if (!$(this).hasClass('radiusItemThreeSelected')){
-                    $(this).addClass('radiusItemThreeSelected').addClass('selected');
-                }
-                radiusItems.eq(0).removeClass('radiusItemFirstSelected').removeClass('selected');
-                radiusItems.eq(1).removeClass('radiusItemTwoSelected').removeClass('selected');
-            }
-            //获取选中的半径
-            var radius = $(this).find('span strong').text();
-            console.log(radius);
-            //展示站点辐射到地图
-            displayStationRadiatedToMap(radius);
-        });
         /*右边半径选项结束*/
 
 
@@ -408,39 +412,22 @@
 
 
         /*站点辐射开始*/
-        var circles;
+        var stationMaker;
         //在地图上显示站点辐射
-        var displayStationRadiatedToMap= function (currentRadius) {
-            if (!ticc.isNull(circles)){
+        var displayStationToMap= function () {
+            if (!ticc.isNull(stationMaker)){
                 //清空地图的覆盖物
-                stationRadiatedMap.clearOverlays();
+                lineGotoAreaMap.clearOverlays();
             }
             //圆形的中心点坐标
-            var centerPoints = [];
+            var stationPoints = [];
 
-            centerPoints.push(new BMap.Point(113.338136,23.138942));
-            centerPoints.push(new BMap.Point(113.348347,23.175673));
-            centerPoints.push(new BMap.Point(113.385484,23.174454));
+            stationPoints.push(new BMap.Point(113.338136,23.138942));
+            stationPoints.push(new BMap.Point(113.348347,23.175673));
+            stationPoints.push(new BMap.Point(113.385484,23.174454));
             //五山路口
-            centerPoints.push(new BMap.Point(113.35111,23.14726));
-            centerPoints.push(new BMap.Point(113.359727,23.157903));
-            //圆形的半径，单位为米
-            var radius = currentRadius;
-            // var radius = [];
-            // radius.push(200);
-            // radius.push(200);
-            // $.each(data, function (index, item) {
-            //     centerPoints.push(new BMap.Point(item.inclosureCenterLng,item.inclosureCenterLat));
-            //     radius.push(item.inclosureRadius);
-            // });
-            //添加全部站点辐射
-
-            var circleOpts = genStationRadiatedOpti(radius);
-            circles = baiduMapUtil.addCircle(centerPoints,radius,circleOpts,'click',function (circle) {
-                // currSelectCircle = circle;
-                // //显示围栏车辆信息
-                // displayInclosureBusInfo(busPoints,labels);
-            });
+            stationPoints.push(new BMap.Point(113.35111,23.14726));
+            stationPoints.push(new BMap.Point(113.359727,23.157903));
 
             var posIcon = new BMap.Icon(
                 // '${pageContext.request.contextPath}/ticc/common/static/images/map/map_location_icon.png',
@@ -449,65 +436,14 @@
             );
             var markerOptions = {icon:posIcon};
             //添加中心覆盖物
-            baiduMapUtil.addMarker(centerPoints,markerOptions);
+            stationMaker = baiduMapUtil.addMarker(stationPoints,markerOptions);
 
             setTimeout(function () {
-                stationRadiatedMap.setViewport(centerPoints);
+                lineGotoAreaMap.setViewport(stationPoints);
             },200);
-//                baiduMapUtil.addMarker(centerPoints);
         };
 
-        //生成站点辐射圆标注物配置项
-        var genStationRadiatedOpti = function (radius) {
-            var circleOpts;
-            switch (radius){
-                case '200':
-                    circleOpts = {
-                        strokeColor: '#b15753',//	圆形边线颜色
-                        fillColor: '#b15753',
-                        fillOpacity: 0.2,
-                        strokeWeight: 2,
-                        strokeOpacity: 0.5
-                        // enableEditing: true
-                    };
-                    break;
-                case '400':
-                    circleOpts = {
-                        strokeColor: '#759aa0',//	圆形边线颜色
-                        fillColor: '#759aa0',
-                        fillOpacity: 0.2,
-                        strokeWeight: 2,
-                        strokeOpacity: 0.5
-                        // enableEditing: true
-                    };
-                    break;
-                case '600':
-                    circleOpts = {
-                        strokeColor: '#e69d87',//	圆形边线颜色
-                        fillColor: '#e69d87',
-                        fillOpacity: 0.2,
-                        strokeWeight: 2,
-                        strokeOpacity: 0.5
-                        // enableEditing: true
-                    };
-                    break;
-                default:
-                    circleOpts = {
-                        strokeColor: '#b15753',//	圆形边线颜色
-                        fillColor: '#b15753',
-                        fillOpacity: 0.2,
-                        strokeWeight: 2,
-                        strokeOpacity: 0.5
-                        // enableEditing: true
-                    };
-                    break;
-            }
-
-            return circleOpts;
-        };
-
-
-        displayStationRadiatedToMap('200');
+        displayStationToMap();
         /*站点辐射结束*/
     });
 </script>
