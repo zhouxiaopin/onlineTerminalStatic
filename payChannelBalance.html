@@ -126,6 +126,8 @@
         /*###############################*/
 
         /*统计显示开始*/
+
+        /*支付类型分析开始*/
         .payChannelBalanceStatisticsArea{
             width: 90%;
             height: 85%;
@@ -186,6 +188,47 @@
             -moz-transform: translate(-50%,-50%);
             -ms-transform: translate(-50%,-50%);
         }
+        /*支付类型分析结束*/
+        /*######################################*/
+        /*羊城通卡刷卡类型开始*/
+        #yctSwingCardTypeArea>div{
+            width: 100%;
+        }
+        #yctSwingCardTypeArea>div:nth-of-type(1){
+            height: 40%;
+        }
+        #yctSwingCardTypeArea>div:nth-of-type(2){
+            height: 60%;
+        }
+        #yctSwingCardTypeArea>div:nth-of-type(2)>section{
+            height: 100%;
+            width: 100%;
+            /*margin-left: -60px;*/
+        }
+        #yctSwingCardTypeArea>div ul{
+            list-style: none;
+            padding: 20px;
+        }
+        #yctSwingCardTypeArea>div ul li{
+            width: 33.33%;
+            display: block;
+            float: left;
+            margin-top: 20px;
+        }
+        #yctSwingCardTypeArea>div ul li>img{
+            width: 40px;
+            height: 40px;
+            margin-top: 5px;
+        }
+        #yctSwingCardTypeArea>div ul li>p{
+            position: relative;
+            top: -6px;
+            display: inline-block;
+        }
+        #yctSwingCardTypeArea>div ul li>p>span:nth-of-type(1)>strong{
+            font-size: 20px
+        }
+        /*羊城通卡刷卡类型结束*/
         /*统计显示结束*/
       
     </style>
@@ -260,7 +303,56 @@
     <!--羊城通卡刷卡类型-->
     <section>
         <header><span>羊城通卡刷卡类型</span></header>
-        <section>
+        <section id="yctSwingCardTypeArea">
+            <div>
+                <ul>
+                    <li>
+                        <img src="image/ordinary_card_icon.png"/>
+                        <p>
+                            <span><strong class="fontYellow">116</strong>万次</span><br/>
+                            <span>普通卡</span>
+                        </p>
+                    </li>
+                    <li>
+                        <img src="image/student_card_icon.png"/>
+                        <p>
+                            <span><strong class="fontYellow">24</strong>万次</span><br/>
+                            <span>学生卡</span>
+                        </p>
+                    </li>
+                    <li>
+                        <img src="image/trip_card_icon.png"/>
+                        <p>
+                            <span><strong class="fontYellow">14</strong>万次</span><br/>
+                            <span>旅游卡</span>
+                        </p>
+                    </li>
+                    <li>
+                        <img src="image/old_people_card_icon.png"/>
+                        <p>
+                            <span><strong class="fontYellow">11</strong>万次</span><br/>
+                            <span>老人卡</span>
+                        </p>
+                    </li>
+                    <li>
+                        <img src="image/disabled_person_card_icon.png"/>
+                        <p>
+                            <span><strong class="fontYellow">4</strong>万次</span><br/>
+                            <span>残疾卡</span>
+                        </p>
+                    </li>
+                    <li>
+                        <img src="image/other_card_icon.png"/>
+                        <p>
+                            <span><strong class="fontYellow">14</strong>万次</span><br/>
+                            <span>其他卡(低保、军人等)</span>
+                        </p>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <section id="yctSwingCardTypeChart"></section>
+            </div>
         </section>
     </section>
 </div>
@@ -466,6 +558,79 @@
         /*支付类型分析饼状图结束*/
 
 
+        /*##################################*/
+
+
+        /*羊城通卡刷卡类型雷达图开始*/
+
+        var yctSwingCardTypeChart = echarts.init(document.getElementById('yctSwingCardTypeChart'));
+        var yctSwingCardTypeChartOption ={
+            tooltip: {},
+            legend: {
+                orient:'vertical',
+                right:30,
+                top:'center',
+                data: ['普通', '学生', '旅游', '老人', '其他\n(残疾、低保、军人等)'],
+                icon: 'circle',
+                textStyle: {
+                    color: '#fff'
+                },
+                itemGap:25
+            },
+            radar: {
+                // shape: 'circle',
+                name: {
+                    textStyle: {
+                        color: '#fff',
+                        // backgroundColor: '#999',
+                        borderRadius: 3,
+                        padding: [3, 5]
+                    }
+                },
+                indicator: [
+                    { name: '周一', max: 6500},
+                    { name: '周二', max: 16000},
+                    { name: '周三', max: 30000},
+                    { name: '周四', max: 38000},
+                    { name: '周五', max: 52000},
+                    { name: '周六', max: 25000},
+                    { name: '周日', max: 25000}
+                ],
+                center: ['32%', '50%'],
+                radius: '65%'
+            },
+            series: [{
+                // name: '预算 vs 开销',
+                type: 'radar',
+                // areaStyle: {normal: {}},
+                data : [
+                    {
+                        value : [4300, 10000, 27000, 35000, 50000, 19000,14000],
+                        name : '普通'
+                    },
+                    {
+                        value : [4900, 11000, 26000, 31000, 42000, 21000,15000],
+                        name : '学生'
+                    },
+                    {
+                        value : [5200, 12000, 25000, 32000, 43000, 23000,16000],
+                        name : '旅游'
+                    },
+                    {
+                        value : [5400, 13000, 24000, 33000, 44000, 24000,17000],
+                        name : '老人'
+                    },
+                    {
+                        value : [5600, 14000, 23000, 34000, 45000, 25000,18000],
+                        name : '其他\n(残疾、低保、军人等)'
+                    }
+                ],
+                color:['#dd6b66', '#759aa0','#e69d87','#8dc1a9','#eedd78']
+            }]
+        };
+        yctSwingCardTypeChart.setOption(yctSwingCardTypeChartOption);
+
+        /*羊城通卡刷卡类型雷达图结束*/
 
     });
 </script>

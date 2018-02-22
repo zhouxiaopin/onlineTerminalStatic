@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>线路通达区域</title>
+    <title>拥堵路段影响线路</title>
 
     <style type="text/css">
         /*解决显示不了地图*/
@@ -210,6 +210,77 @@
         }
         #leftSearchConditionArea form input:focus { outline: none; }
         /*左边搜索条件结束*/
+
+
+        /*######################################*/
+
+
+
+        /*经过站点的线路显示开始*/
+        #leftPassStationLineDisplayArea{
+            left: 40px;
+            top: 220px;
+            width: 340px;
+            height: 400px;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+        #leftPassStationLineDisplayArea>header{
+            width: 100%;
+            height:8%;
+            text-align: center;
+            color: #FFFFFF;
+            background-color: rgba(255,255,255,0.2);
+            font-size: 14px;
+            vertical-align: middle;
+            border-bottom: 1px solid rgba(255,255,255,0.5);
+            padding-top: 1.5%;
+        }
+        #leftPassStationLineDisplayArea>section{
+            width: 100%;
+            height: 92%;
+            color: #FFFFFF;
+            background-color: rgba(255,255,255,0.1);
+            overflow-y: scroll;
+        }
+        #leftPassStationLineDisplayArea section table{
+            width: 100%;
+            height: 100%;
+            border-collapse: collapse;
+        }
+        #leftPassStationLineDisplayArea section table tr{
+            width: 100%;
+            min-height: 40px;
+            display: inline-block;
+            padding-left: 10px;
+            line-height: 40px;
+            vertical-align: middle;
+        }
+        #leftPassStationLineDisplayArea section table tr td{
+            display: inline-block;
+        }
+        #leftPassStationLineDisplayArea section table tr td:nth-of-type(1){
+            width: 60%;
+
+        }
+        #leftPassStationLineDisplayArea section table tr td:nth-of-type(2){
+            width: 35%;
+        }
+        #leftPassStationLineDisplayArea section table tr:nth-child(even){
+            background-color: rgba(255,255,255,0.1);
+        }
+        /*#leftPassStationLineDisplayArea>section>header>span{*/
+            /*width: 100%;*/
+            /*height: 100%;*/
+            /*padding-top: 10px;*/
+            /*display: inline-block;*/
+            /*vertical-align: middle;*/
+        /*}*/
+        /*#leftPassStationLineDisplayArea>section>section{*/
+            /*height:92%;*/
+            /*background-color: rgba(255,255,255,0.2);*/
+            /*font-size: 14px;*/
+        /*}*/
+        /*经过站点的线路显示结束*/
     </style>
 </head>
 <body>
@@ -226,7 +297,7 @@
                 <img src="image/white_line.png">
             </li>
             <li>
-                <a class="menuLiSelected">
+                <a>
                     <img src="image/line_goto_li_icon_normal.png">线路通达区域
                 </a>
                 <img src="image/white_line.png">
@@ -238,7 +309,7 @@
                 <img src="image/white_line.png">
             </li>
             <li>
-                <a>
+                <a class="menuLiSelected">
                     <img src="image/advocacy_route_li_icon_normal.png">拥堵路段影响线路
                 </a>
                 <img src="image/white_line.png">
@@ -311,6 +382,70 @@
     </form>
 </aside>
 <!--左边搜索条件结束-->
+
+
+<!--######################-->
+
+
+<!--经过站点的线路显示开始-->
+<section id="leftPassStationLineDisplayArea" class="elementAboveMap">
+    <header><span>途径<strong class="fontYellow">康乐新村站</strong>线路</span></header>
+    <section>
+        <table>
+            <tbody>
+                <tr>
+                    <td>线路颜色</td>
+                    <td>215.28万次</td>
+                </tr>
+                <tr>
+                    <td>线路颜色</td>
+                    <td>21.28万次</td>
+                </tr>
+                <tr>
+                    <td>线路颜色</td>
+                    <td>21.28万次</td>
+                </tr>
+                <tr>
+                    <td>线路颜色</td>
+                    <td>21.28万次</td>
+                </tr>
+                <tr>
+                    <td>线路颜色</td>
+                    <td>21.28万次</td>
+                </tr>
+                <tr>
+                    <td>线路颜色</td>
+                    <td>21.28万次</td>
+                </tr>
+                <tr>
+                    <td>线路颜色</td>
+                    <td>21.28万次</td>
+                </tr>
+                <tr>
+                    <td>线路颜色</td>
+                    <td>21.28万次</td>
+                </tr>
+                <tr>
+                    <td>线路颜色</td>
+                    <td>21.28万次</td>
+                </tr>
+                <tr>
+                    <td>线路颜色</td>
+                    <td>21.28万次</td>
+                </tr>
+                <tr>
+                    <td>线路颜色</td>
+                    <td>21.28万次</td>
+                </tr>
+                <tr>
+                    <td>线路颜色</td>
+                    <td>21.28万次</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+</section>
+<!--经过站点的线路显示结束-->
 <script src="js/jquery.min.js"></script>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=fdv5gclnF2HSnNyKm4Dj3aVuLUGMLUZ1"></script>
 <script src="js/baiduMapCommon.js"></script>

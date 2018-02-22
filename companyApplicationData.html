@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>线路通达区域</title>
+    <title>企业运营数据</title>
 
     <style type="text/css">
         /*解决显示不了地图*/
@@ -125,91 +125,36 @@
 
         /*###############################*/
 
-        /*右边颜色说明开始*/
-        #rightLineColorExplain{
-            right: 40px;
-            top: 100px;
-            width: 300px;
-            height: 250px;
-        }
-        #rightLineColorExplain table{
-            height:100%;
-            width: 100%;
-            border: 1px solid rgba(255,255,255,0.5);
-            border-collapse: collapse;
-            text-align: center;
-            color: #ffffff;
-        }
-        #rightLineColorExplain table,#rightLineColorExplain table tr th, #rightLineColorExplain table tr td {
-            border: 1px solid rgba(255,255,255,0.5);
-        }
-        #rightLineColorExplain table tr td{
-            font-size: 12px;
-        }
-        #rightLineColorExplain table tr:nth-child(odd){
+        /*统计显示开始*/
+
+        .companyApplicationDataArea{
+            width: 94%;
+            height: 84%;
+            /*background-color: #dd6b66;*/
+            /*居中*/
+            margin: auto;
+            top: 60px;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            border: 2px solid rgba(255,255,255,0.5);
             background-color: rgba(255,255,255,0.2);
         }
-        #rightLineColorExplain table tr:nth-child(even){
-            background-color: rgba(255,255,255,0.1);
+        #companyApplicationDataChart{
+            top: 50%;
+            left: 50%;
+            width: 90%;
+            height: 90%;
+            /*居中的*/
+            position: relative;
+            transform: translate(-50%,-50%);
+            -webkit-transform: translate(-50%,-50%);
+            -moz-transform: translate(-50%,-50%);
+            -ms-transform: translate(-50%,-50%);
         }
-        #rightLineColorExplain table tr th:nth-of-type(1){
-            width: 30%;
-        }
-        #rightLineColorExplain table tr td:nth-of-type(1) span{
-            display: inline-block;
-            width: 50%;
-            height: 30%;
-        }
-        #rightLineColorExplain table tr.two td:nth-of-type(1) span{
-            background-color: #F91050;
-        }
-        #rightLineColorExplain table tr.three td:nth-of-type(1) span{
-            background-color: #F3F606;
-        }
-        #rightLineColorExplain table tr.four td:nth-of-type(1) span{
-            background-color: #10FDF5;
-        }
-        #rightLineColorExplain table tr.five td:nth-of-type(1) span{
-            background-color: #0CF496;
-        }
-        /*右边颜色说明结束*/
 
-
-        /*#####################################*/
-
-
-        /*左边搜索条件开始*/
-        #leftSearchConditionArea{
-            left: 40px;
-            top: 100px;
-            width: 340px;
-            height: 50px;
-            border: 1px solid rgba(255,255,255,0.5);
-        }
-        #leftSearchConditionArea form{
-            height: 100%;
-            font-size: 0px;
-        }
-        #leftSearchConditionArea form input{
-            border: none;
-            display: inline-block;
-            height: 100%;
-            background: none;
-            color: #FFFFFF;
-            font-size: 16px;
-
-        }
-        #leftSearchConditionArea form input:nth-of-type(1){
-            width: 80%;
-            padding-left: 20px;
-        }
-        #leftSearchConditionArea form input:nth-of-type(2){
-            width: 20%;
-            border-left: 1px solid rgba(255,255,255,0.5);
-            cursor:pointer;
-        }
-        #leftSearchConditionArea form input:focus { outline: none; }
-        /*左边搜索条件结束*/
+        /*统计显示结束*/
+      
     </style>
 </head>
 <body>
@@ -226,7 +171,7 @@
                 <img src="image/white_line.png">
             </li>
             <li>
-                <a class="menuLiSelected">
+                <a >
                     <img src="image/line_goto_li_icon_normal.png">线路通达区域
                 </a>
                 <img src="image/white_line.png">
@@ -244,7 +189,7 @@
                 <img src="image/white_line.png">
             </li>
             <li>
-                <a>
+                <a class="menuLiSelected">
                     <img src="image/company_apply_li_icon_normal.png">企业运营数据
                 </a>
                 <img src="image/white_line.png">
@@ -262,55 +207,19 @@
 <!--#######################################-->
 
 <!--地图开始-->
-<section id="lineGotoAreaMap" class="mapStyle">
+<section id="companyApplicationDataMap" class="mapStyle">
 </section>
 <!--地图结束-->
 
-
 <!--#######################################-->
 
+<!--统计显示开始-->
+<div class="companyApplicationDataArea elementAboveMap">
+    <section id="companyApplicationDataChart">
+    </section>
+</div>
+<!--统计显示结束-->
 
-<!--颜色说明开始-->
-<aside id="rightLineColorExplain" class="elementAboveMap">
-    <table>
-        <tbody>
-            <tr class="one">
-                <th>线路颜色</th>
-                <th>线路客流量说明</th>
-            </tr>
-            <tr class="two">
-                <td><span></span></td>
-                <td>客流量≥20万人/小时</td>
-            </tr>
-            <tr class="three">
-                <td><span></span></td>
-                <td>20万人/小时&lt; 客流量≥15万人/小时</td>
-            </tr>
-            <tr class="four">
-                <td><span></span></td>
-                <td>15万人/小时&lt; 客流量≥10万人/小时</td>
-            </tr>
-            <tr class="five">
-                <td><span></span></td>
-                <td>客流量&gt; 万人/小时</td>
-            </tr>
-        </tbody>
-    </table>
-</aside>
-<!--颜色说明结束-->
-
-
-<!--#######################################-->
-
-
-<!--左边搜索条件开始-->
-<aside id="leftSearchConditionArea" class="elementAboveMap">
-    <form>
-        <input type="text" placeholder="请输入站点">
-        <input type="button" value="GO">
-    </form>
-</aside>
-<!--左边搜索条件结束-->
 <script src="js/jquery.min.js"></script>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=fdv5gclnF2HSnNyKm4Dj3aVuLUGMLUZ1"></script>
 <script src="js/baiduMapCommon.js"></script>
@@ -320,8 +229,8 @@
 <script type="text/javascript">
     $(function () {
         // 获取Map实例
-        var lineGotoAreaMap = baiduMapUtil.getDisplayMap("lineGotoAreaMap");
-        lineGotoAreaMap.setMapStyle({styleJson:baiduMapStyle});
+        var companyApplicationDataMap = baiduMapUtil.getDisplayMap("companyApplicationDataMap");
+        companyApplicationDataMap.setMapStyle({styleJson:baiduMapStyle});
 
         /*顶部菜单相关开始*/
         //菜单项
@@ -393,50 +302,129 @@
         /*##################################*/
 
 
-
-        /*左边搜索条件开始*/
-
-
-        /*左边搜索条件结束*/
+        /*企业运营数据饼状图开始*/
+        // 初始化echarts实例
+        var companyApplicationDataChart = echarts.init(document.getElementById('companyApplicationDataChart'));
 
 
-        /*##############################################*/
+        // 指定图表的配置项和数据
+        var companyApplicationDataChartOption = {
+            legend: {
+                type:'scroll',
+                orient:'vertical',
+                left:30,
+                top:'center',
+                data: ['广州市第一公共汽车公司', '广州市第二公共汽车公司', '广州市第三公共汽车公司',
+                    '广州市新福利巴士公司', '广州市电车公司', '广州市电车公司1', '广州市电车公司2', '广州市电车公司3',
+                    '广州市新福利巴士公司1', '广州市电车公司4', '广州市电车公司5', '广州市电车公司6', '广州市电车公司7',
+                    '广州市新福利巴士公司2', '广州市电车公司8', '广州市电车公司9', '广州市电车公司10', '广州市电车公司11',
+                    '广州市新福利巴士公司3', '广州市电车公司12', '广州市电车公司13', '广州市电车公司14', '广州市电车公司15'],
+                icon: 'circle',
+                textStyle: {
+                    color: '#fff'
+                },
+                borderColor:'#fff',
+                borderWidth:2,
+                borderRadius: 5,
+                padding:[12,20],
+                itemGap:10,
+                pageIconColor:'#fff',
+                pageIconInactiveColor: '#888',
+                pageTextStyle:{
+                    color: '#fff'
+                }
+            },
+            tooltip : {
+                trigger: 'item',
+                // formatter: "{a} <br/>{b} : {c} ({d}%)"
+                formatter: "{b} : {c} ({d}%)"
+            },
+            visualMap: {
+                show: false,
+                min: 80,
+                max: 600,
+                inRange: {
+                    colorLightness: [0, 1]
+                }
+            },
+            series : [
+                {
+                    // name:'访问来源',
+                    type:'pie',
+                    radius : '55%',
+                    center: ['65%', '50%'],
+                    data:[
+                        {value:335, name:'广州市第一公共汽车公司'},
+                        {value:310, name:'广州市第二公共汽车公司'},
+                        {value:274, name:'广州市第三公共汽车公司'},
+                        {value:235, name:'广州市新福利巴士公司'},
+                        {value:400, name:'广州市电车公司'},
+                        {value:100, name:'广州市电车公司1'},
+                        {value:200, name:'广州市电车公司2'},
+                        {value:300, name:'广州市电车公司3'},
+                        {value:235, name:'广州市新福利巴士公司1'},
+                        {value:235, name:'广州市新福利巴士公司2'},
+                        {value:235, name:'广州市新福利巴士公司3'},
+                        {value:100, name:'广州市电车公司4'},
+                        {value:200, name:'广州市电车公司5'},
+                        {value:300, name:'广州市电车公司6'},
+                        {value:100, name:'广州市电车公司7'},
+                        {value:200, name:'广州市电车公司8'},
+                        {value:300, name:'广州市电车公司9'},
+                        {value:100, name:'广州市电车公司10'},
+                        {value:200, name:'广州市电车公司11'},
+                        {value:300, name:'广州市电车公司12'},
+                        {value:100, name:'广州市电车公司13'},
+                        {value:200, name:'广州市电车公司14'},
+                        {value:300, name:'广州市电车公司15'}
+                    ].sort(function (a, b) { return a.value - b.value; }),
+                    roseType: 'radius',
+                    label: {
+                        normal: {
+                            formatter: "{b} : {c}万次 {d}%",
+                            textStyle: {
+                                color: 'rgba(255, 255, 255, 1)'
+                            },
+                            // rich: {
+                            //     c: {
+                            //         color: '#e9ec06',
+                            //         lineHeight: 22,
+                            //         align: 'center'
+                            //     }
+                            // }
+                        }
+                    },
+                    // labelLine: {
+                    //     normal: {
+                    //         lineStyle: {
+                    //             color: 'rgba(255, 255, 255, 0.3)'
+                    //         },
+                    //         smooth: 0.2,
+                    //         length: 10,
+                    //         length2: 20
+                    //     }
+                    // },
+                    // itemStyle: {
+                    //     normal: {
+                    //         color: '#c23531',
+                    //         shadowBlur: 200,
+                    //         shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    //     }
+                    // },
 
-
-        /*站点辐射开始*/
-        var stationMaker;
-        //在地图上显示站点辐射
-        var displayStationToMap= function () {
-            if (!ticc.isNull(stationMaker)){
-                //清空地图的覆盖物
-                lineGotoAreaMap.clearOverlays();
-            }
-            //圆形的中心点坐标
-            var stationPoints = [];
-
-            stationPoints.push(new BMap.Point(113.338136,23.138942));
-            stationPoints.push(new BMap.Point(113.348347,23.175673));
-            stationPoints.push(new BMap.Point(113.385484,23.174454));
-            //五山路口
-            stationPoints.push(new BMap.Point(113.35111,23.14726));
-            stationPoints.push(new BMap.Point(113.359727,23.157903));
-
-            var posIcon = new BMap.Icon(
-                // '${pageContext.request.contextPath}/ticc/common/static/images/map/map_location_icon.png',
-                'image/current_location.png',
-                new BMap.Size(15,19)
-            );
-            var markerOptions = {icon:posIcon};
-            //添加中心覆盖物
-            stationMaker = baiduMapUtil.addMarker(stationPoints,markerOptions);
-
-            setTimeout(function () {
-                lineGotoAreaMap.setViewport(stationPoints);
-            },200);
+                    animationType: 'scale',
+                    animationEasing: 'elasticOut',
+                    animationDelay: function (idx) {
+                        return Math.random() * 200;
+                    },
+                    color:['#dd6b66', '#eedd78','#8dc1a9','#e69d87','#759aa0']
+                }
+            ]
         };
+        // 使用刚指定的配置项和数据显示图表。
+        companyApplicationDataChart.setOption(companyApplicationDataChartOption);
+        /*企业运营数据饼状图结束*/
 
-        displayStationToMap();
-        /*站点辐射结束*/
     });
 </script>
 </body>
