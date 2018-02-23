@@ -1,0 +1,70 @@
+/*顶部样式开始*/
+.mainTop{
+    /*height: 60px;*/
+    height: 90px;
+    background-color: #0c3a5f;
+    filter: alpha(Opacity=80);
+    -moz-opacity: 0.8;
+    opacity: 0.8;
+}
+#mainTitle{
+    min-width: 350px;
+    width: 25.6%;
+    /*height: 100%;*/
+    height: 50px;
+    line-height: 50px;
+    vertical-align: middle;
+    padding-left: 25px;
+    background-image: url("../image/display_title_bg.png");
+    display: inline-block;
+    background-size:100%;
+}
+#mainTitle ~ nav{
+    display: inline-block;
+    vertical-align: middle;
+}
+#mainMenuList,#secondMenuList{
+    /*min-width: 1006px;*/
+    min-width: 1000px;
+    width: 74.4%;
+    float: left;
+    margin-left: 10px;
+    list-style: none;
+}
+#mainMenuList li,#secondMenuList li{
+    /*width: 16.666%;*/
+    width: 16.66%;
+    float: left;
+    color: #ffffff;
+    /*margin-left: 10px;*/
+}
+#mainMenuList li a,#secondMenuList li a{
+    width: 86%;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    cursor: pointer;
+    padding: 2px;
+    border: 1px solid rgba(255,255,255,0.5);
+}
+#mainMenuList li a img,#secondMenuList li a img{
+    width: 15px;
+    height: 15px;
+    vertical-align: middle;
+    margin-right: 5px;
+
+}
+#mainMenuList li a img:not(.noMargin),#secondMenuList li a img:not(.noMargin){
+    margin-bottom: 3px;
+}
+#mainMenuList li>img,#secondMenuList li>img{
+    display: inline-block;
+    vertical-align: middle;
+    width: 10%;
+}
+.menuLiSelected{
+    border: 1px solid rgba(233,236,6,0.5) !important;
+    color: #e9ec06;
+}
+/*顶部样式结束*/
+/*##############################*/

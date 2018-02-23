@@ -1,0 +1,47 @@
+/*解决显示不了地图*/
+html,body{width: 100%;height: 100%;overflow: hidden;}
+html {
+    font-size: 14px;
+}
+
+body {
+    font-family: "Microsoft Yahei";
+}
+/* 初始化 */
+body, div, ul, li, ol, h1, h2, h3, h4, h5, h6, input, textarea, select, p, dl, dt, dd, a, img, button, form, table, th, tr, td, tbody, article,
+aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section,a,span {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /*border: none;*/
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #FFFFFF; opacity:0.8;
+}
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #FFFFFF;opacity:0.8;
+}
+
+input:-ms-input-placeholder{
+    color: #FFFFFF;opacity:0.8;
+}
+
+input::-webkit-input-placeholder{
+    color: #FFFFFF;opacity:0.8;
+}
+.fontYellow{
+    color: #e9ec06;
+}
+
+/*显示在地图之上的样式*/
+.elementAboveMap{
+    z-index: 1201;
+    position: absolute;
+}
+.outWith{
+    min-width: 1366px;
+    width: 100%;
+}
+/*地图通用样式*/
+.mapStyle{width: 100%;height: 100%;overflow: hidden;margin:0;}

@@ -3,127 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>BRT通道客流量</title>
-
+    <link href="css/base.css" rel="stylesheet" />
+    <link href="css/topMenu.css" rel="stylesheet" />
+    <link href="css/searchArea.css" rel="stylesheet" />
     <style type="text/css">
-        /*解决显示不了地图*/
-        html,body{width: 100%;height: 100%;overflow: hidden;}
-        html {
-            font-size: 14px;
-        }
 
-        body {
-            font-family: "Microsoft Yahei";
-        }
-        /* 初始化 */
-        body, div, ul, li, ol, h1, h2, h3, h4, h5, h6, input, textarea, select, p, dl, dt, dd, a, img, button, form, table, th, tr, td, tbody, article,
-        aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section,a,span {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            /*border: none;*/
-        }
-
-        :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-            color: #FFFFFF; opacity:0.8;
-        }
-
-        ::-moz-placeholder { /* Mozilla Firefox 19+ */
-            color: #FFFFFF;opacity:0.8;
-        }
-
-        input:-ms-input-placeholder{
-            color: #FFFFFF;opacity:0.8;
-        }
-
-        input::-webkit-input-placeholder{
-            color: #FFFFFF;opacity:0.8;
-        }
-
-        .fontYellow{
-            color: #e9ec06;
-        }
-
-        /*显示在地图之上的样式*/
-        .elementAboveMap{
-            z-index: 1201;
-            position: absolute;
-        }
-        .outWith{
-
-            min-width: 1366px;
-            width: 100%;
-        }
-        .mainTop{
-            /*height: 60px;*/
-            height: 90px;
-            background-color: #0c3a5f;
-            filter: alpha(Opacity=80);
-            -moz-opacity: 0.8;
-            opacity: 0.8;
-        }
-        /*地图通用样式*/
-        .mapStyle{width: 100%;height: 100%;overflow: hidden;margin:0;}
-        /*顶部样式开始*/
-        #mainTitle{
-            min-width: 350px;
-            width: 25.6%;
-            /*height: 100%;*/
-            height: 50px;
-            line-height: 50px;
-            vertical-align: middle;
-            padding-left: 25px;
-            background-image: url("image/display_title_bg.png");
-            display: inline-block;
-            background-size:100%;
-        }
-        #mainTitle ~ nav{
-            display: inline-block;
-            vertical-align: middle;
-        }
-        #mainMenuList{
-            /*min-width: 1006px;*/
-            min-width: 1000px;
-            width: 74.4%;
-            float: left;
-            margin-left: 10px;
-            list-style: none;
-        }
-        #mainMenuList li{
-            /*width: 16.666%;*/
-            width: 16.66%;
-            float: left;
-            color: #ffffff;
-            /*margin-left: 10px;*/
-        }
-        #mainMenuList li a{
-            width: 86%;
-            display: inline-block;
-            vertical-align: middle;
-            text-align: center;
-            cursor: pointer;
-            padding: 2px;
-            border: 1px solid rgba(255,255,255,0.5);
-        }
-        #mainMenuList li a img{
-            width: 15px;
-            height: 15px;
-            vertical-align: middle;
-            margin-right: 5px;
-
-        }
-        #mainMenuList li a img:not(.noMargin){
-            margin-bottom: 3px;
-        }
-        #mainMenuList li>img{
-            display: inline-block;
-            vertical-align: middle;
-            width: 10%;
-        }
-        .menuLiSelected{
-            border: 1px solid rgba(233,236,6,0.5) !important;
-            color: #e9ec06;
-        }
-        /*##############################*/
         /*二级目录开始*/
         .secondMenu{
             width: 100%;
@@ -139,90 +23,11 @@
             padding-top: 6px;
             padding-left: 140px;
         }
-        #secondMenuList{
-            /*min-width: 1006px;*/
-            min-width: 1000px;
-            width: 74.4%;
-            float: left;
-            margin-left: 10px;
-            list-style: none;
-
-        }
-        #secondMenuList li{
-            width: 16.66%;
-            float: left;
-            color: #ffffff;
-        }
-        #secondMenuList li a{
-            width: 86%;
-            display: inline-block;
-            vertical-align: middle;
-            text-align: center;
-            cursor: pointer;
-            padding: 2px;
-            border: 1px solid rgba(255,255,255,0.5);
-        }
-        #secondMenuList li a img{
-            width: 15px;
-            height: 15px;
-            vertical-align: middle;
-            margin-right: 5px;
-
-        }
-        #secondMenuList li a img:not(.noMargin){
-            margin-bottom: 3px;
-        }
-        #secondMenuList li>img{
-            display: inline-block;
-            vertical-align: middle;
-            width: 10%;
-        }
 
         /*二级目录结束*/
 
-        /*顶部样式结束*/
-
 
         /*#####################################*/
-
-
-        /*左边搜索条件开始*/
-        #leftSearchConditionArea{
-            left: 40px;
-            top: 120px;
-            width: 300px;
-            height: 40px;
-            border: 1px solid rgba(255,255,255,0.5);
-        }
-        #leftSearchConditionArea form{
-            height: 100%;
-            font-size: 0px;
-        }
-        #leftSearchConditionArea form input{
-            border: none;
-            display: inline-block;
-            height: 100%;
-            /*background: none;*/
-            color: #FFFFFF;
-            font-size: 16px;
-            background-color: rgba(255,255,255,0.1);
-        }
-        #leftSearchConditionArea form input:nth-of-type(1){
-            width: 80%;
-            padding-left: 20px;
-        }
-        #leftSearchConditionArea form input:nth-of-type(2){
-            width: 20%;
-            border-left: 1px solid rgba(255,255,255,0.5);
-            cursor:pointer;
-        }
-        #leftSearchConditionArea form input:focus { outline: none; }
-        /*左边搜索条件结束*/
-
-
-        /*######################################*/
-
-
 
     </style>
 </head>
