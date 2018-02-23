@@ -55,7 +55,7 @@
         }
         .mainTop{
             /*height: 60px;*/
-            height: 100px;
+            height: 90px;
             background-color: #0c3a5f;
             filter: alpha(Opacity=80);
             -moz-opacity: 0.8;
@@ -68,8 +68,8 @@
             min-width: 350px;
             width: 25.6%;
             /*height: 100%;*/
-            height: 60px;
-            line-height: 60px;
+            height: 50px;
+            line-height: 50px;
             vertical-align: middle;
             padding-left: 25px;
             background-image: url("image/display_title_bg.png");
@@ -187,9 +187,9 @@
         /*右边颜色说明开始*/
         #rightLineColorExplain{
             right: 40px;
-            top: 140px;
-            width: 300px;
-            height: 250px;
+            top: 120px;
+            width: 280px;
+            height: 200px;
         }
         #rightLineColorExplain table{
             height:100%;
@@ -240,9 +240,9 @@
         /*左边搜索条件开始*/
         #leftSearchConditionArea{
             left: 40px;
-            top: 140px;
-            width: 340px;
-            height: 50px;
+            top: 120px;
+            width: 300px;
+            height: 40px;
             border: 1px solid rgba(255,255,255,0.5);
         }
         #leftSearchConditionArea form{
@@ -253,10 +253,10 @@
             border: none;
             display: inline-block;
             height: 100%;
-            background: none;
+            /*background: none;*/
             color: #FFFFFF;
             font-size: 16px;
-
+            background-color: rgba(255,255,255,0.1);
         }
         #leftSearchConditionArea form input:nth-of-type(1){
             width: 80%;
@@ -278,9 +278,9 @@
         /*线路客流前10开始*/
         #leftLinePassengerFlowTopShiDisplayArea{
             left: 40px;
-            top: 220px;
-            width: 340px;
-            height: 400px;
+            top: 250px;
+            width: 300px;
+            height: 340px;
             border: 1px solid rgba(255,255,255,0.5);
         }
         #leftLinePassengerFlowTopShiDisplayArea>header{
@@ -308,10 +308,10 @@
         }
         #leftLinePassengerFlowTopShiDisplayArea section table tr{
             width: 100%;
-            min-height: 35px;
+            min-height: 30px;
             display: inline-block;
             padding-left: 10px;
-            line-height: 35px;
+            line-height: 30px;
             vertical-align: middle;
         }
         #leftLinePassengerFlowTopShiDisplayArea section table tr td{
@@ -391,25 +391,25 @@
             <ul id="secondMenuList">
                 <li>
                 <a >
-                <img src="image/station_over_li_icon_selected.png" class="noMargin">单站点客流量
+                    单站点客流量
                 </a>
                 <img src="image/white_line.png">
                 </li>
                 <li>
                 <a>
-                <img src="image/line_goto_li_icon_normal.png">单车客流量
+                    单车客流量
                 </a>
                 <img src="image/white_line.png">
                 </li>
                 <li>
                 <a class="menuLiSelected">
-                <img src="image/passenger_flow_li_icon_normal.png">线路客流量
+                    线路客流量
                 </a>
                 <img src="image/white_line.png">
                 </li>
                 <li>
                 <a>
-                <img src="image/advocacy_route_li_icon_normal.png">BRT通道客流量
+                    BRT通道客流量
                 </a>
                 </li>
             </ul>
@@ -475,7 +475,7 @@
 <!--######################-->
 
 
-<!--经过站点的线路显示开始-->
+<!--线路客流前10开始-->
 <section id="leftLinePassengerFlowTopShiDisplayArea" class="elementAboveMap">
     <header><span>线路客流量前10</span></header>
     <section>
@@ -526,7 +526,7 @@
         </table>
     </section>
 </section>
-<!--经过站点的线路显示结束-->
+<!--线路客流前10结束-->
 <script src="js/jquery.min.js"></script>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=fdv5gclnF2HSnNyKm4Dj3aVuLUGMLUZ1"></script>
 <script src="js/baiduMapCommon.js"></script>
